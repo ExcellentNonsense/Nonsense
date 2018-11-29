@@ -1,0 +1,170 @@
+/* header
+   ========================================================================== */
+#logo_user_line #user #spent_time {
+  width: 100%;
+  height: 34px;
+  overflow: hidden;
+  font-family: Agency FB, sans-serif;
+  font-size: 41.8px;
+  font-weight: bold;
+  line-height: 0.75em;
+  color: var(--highlight_color);
+}
+#logo_user_line #user #name_time_separator {
+  width: 70px;
+  height: 5px;
+  margin: 14px 0 13px;
+  background: var(--main_color);
+}
+
+
+/* main
+   ========================================================================== */
+.message {
+  padding: 0 0 5px 0;
+  margin: 0 0 20px 0;
+  border-bottom: 1px solid hsl(0, 0%, 90%);
+}
+.message:last-child {
+  padding: 0;
+  margin: 0;
+  border-bottom: none;
+}
+.message .msg_info {
+  padding: 0 0 0 15px;
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--main_color);
+}
+.message .msg_info_from {
+  font-weight: bold;
+}
+/* msg_image
+_____________________________________________________________________________ */
+.message .msg_image {
+  position: relative;
+  display: inline-block;
+}
+.message .msg_image img {
+  max-width: 100%;
+  transform: scale(0.8);
+}
+.message .msg_image_cover_color {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: hsl(227, 64%, 98.6%);
+}
+.message .msg_image_cover_bubbles {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url(../../images/msg_image_cover.png);
+  background-size: cover;
+  opacity: 0.08;
+}
+.message .msg_image:hover img,
+.message .msg_image:focus img {
+  animation: scale_up_down 40s;
+}
+@keyframes scale_up_down {
+  6%,
+  80% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.8);
+  }
+}
+.message .msg_image:hover .msg_image_cover_color,
+.message .msg_image:focus .msg_image_cover_color {
+  animation: uncover_color 40s;
+}
+@keyframes uncover_color {
+  10%,
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.message .msg_image:hover .msg_image_cover_bubbles,
+.message .msg_image:focus .msg_image_cover_bubbles {
+  animation: uncover_bubbles 40s;
+}
+@keyframes uncover_bubbles {
+  10%,
+  80% {
+    opacity: 0;
+    transform: scale(1.07);
+  }
+  100% {
+    opacity: 0.08;
+  }
+}
+/* page_overlay
+_____________________________________________________________________________ */
+#page_overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  background: hsla(0, 0%, 0%, 0.7);
+  transition: opacity 0.5s 0.4s;
+  z-index: 10000;
+}
+#page_overlay div {
+  width: 310px;
+  padding: 20px 80px;
+  margin: 40vh auto;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  text-align: center;
+  overflow: hidden;
+  background: hsl(0, 0%, 100%);
+}
+#page_overlay div p {
+  margin: 0;
+  display: none;
+}
+#page_overlay div p.active_suggestion {
+  display: block;
+}
+#page_overlay div p span {
+  display: block;
+}
+.suggestion_row1 {
+  transition: 0.4s ease-in;
+  transform: translateX(700px);
+}
+.suggestion_row2 {
+  transition: 0.4s ease-in;
+  transform: translateX(-1200px);
+}
+.suggestion_row3 {
+  transition: 0.4s ease-out 0.2s;
+  transform: translateX(1400px);
+}
+#page_overlay div input {
+  padding: 5px 20px;
+  margin: 20px auto 0;
+  background: hsl(0, 0%, 100%);
+  font-size: 1.2rem;
+  box-shadow: 0 0 2px hsl(0, 0%, 0%);
+  border: 1px solid;
+  border-radius: 0px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+#page_overlay div input:hover,
+#page_overlay div input:focus {
+  box-shadow: 0 0 4px hsl(0, 0%, 0%);
+  border: 1px solid hsl(0, 0%, 40%);
+}

@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Обратная связь";
+}
+
+@section Styles {
+    <link href="~/lib/stylesheets/pages/feedback.css" rel="stylesheet" />
+}
+
+<h1>Обратная связь</h1>
+<form method="post" action="">
+  <textarea name="message" placeholder="Привет! О чем думаете?"></textarea><br />
+  <div id="scene">
+    <div id="cube">
+      <input id="top" type="button" value="Благодарим вас" />
+      <input id="front" type="button" value="Отправить сообщение" />
+    </div>
+  </div>
+</form>

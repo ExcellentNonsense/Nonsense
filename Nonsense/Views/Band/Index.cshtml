@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Лента";
+    ViewBag.ShowSpentTime = true;
+}
+
+@section Styles {
+    <link href="~/lib/stylesheets/pages/band.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script src="~/lib/javascripts/band.js"></script>
+}
+
+<h1>Новые сообщения</h1>
+<div id="messages_container"></div>
+
+<div id="page_overlay">
+  <div>
+    <p>
+      <span>Вы занимаетесь ерундой уже 20 минут. За это</span>
+      <span>время можно прочитать 15 страниц</span>
+      <span>произведения "Война и мир".</span>
+    </p>
+    <p>
+      <span>Зачем тратить на ерунду 40 минут?</span>
+      <span>Вы могли бы пробежать</span>
+      <span>12 километров.</span>
+    </p>
+    <p>
+      <span>Вы исчерпали свой лимит ерунды</span>
+      <span>на сегодня и не можете</span>
+      <span>продолжить.</span>
+    </p>
+    <input type="button" onclick="hideOverlay();" value="Продолжить" />
+  </div>
+</div>
+<template id="message_tmpl">
+<div class="message">
+  <p class="msg_info"><span class="msg_info_from">Andrew</span> &ndash; 17 июня</p>
+  <div class="msg_image">
+    <img src="" />
+    <div class="msg_image_cover_color"></div>
+    <div class="msg_image_cover_bubbles"></div>
+  </div>
+</div>
+</template>

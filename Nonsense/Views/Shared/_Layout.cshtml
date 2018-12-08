@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@ViewBag.Title - Ерунда</title>
+  <link asp-href-include="~/lib/stylesheets/globals/*.css" rel="stylesheet" />
+  @RenderSection("Styles", false)
+</head>
+<body>
+  <div id="bg_time_tags" class="bg_container"></div>
+  <div id="bg_water" class="bg_container"></div>
+  <div id="bg_glare" class="bg_container"></div>
+  <div id="bg_border_shadow" class="bg_container"></div>
+  <div id="bg_strip_top">
+    <div class="bg_strip_left"></div>
+    <div class="bg_strip_center"></div>
+    <div class="bg_strip_right"></div>
+  </div>
+  <div id="bg_strip_bottom">
+    <div class="bg_strip_left"></div>
+    <div class="bg_strip_center"></div>
+    <div class="bg_strip_right"></div>
+  </div>
+
+  <div id="top"></div>
+  <div id="wrapper">
+    <header>
+      <div id="logo_user_line_bg"></div>
+      <div id="logo_user_line">
+        <a asp-action="Index" asp-controller="Home" id="logo"></a>
+        <div id="user">
+          <p id="user_name"><a asp-action="Index" asp-controller="Profile">ALEX ADONNIX</a></p>
+          @if (ViewBag.ShowSpentTime ?? false) {
+            <div id="name_time_separator"></div>
+            <div id="spent_time">00:00:000</div>
+          }
+          else {
+            <div id="user_photo"></div>
+          }
+        </div>
+      </div>
+      <div id="nav_line">
+        <nav>
+          <ul>
+            <li><a asp-action="Index" asp-controller="Home" is-active-route>Главная
+            </a></li><li><a asp-action="Index" asp-controller="Band" is-active-route>Лента
+            </a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      @RenderBody()
+    </main>
+    <footer>
+      <a href="#top" id="scroll_to_top_btn">▲</a>
+      <div id="footer_nav">
+        <nav>
+          <ul>
+            <li><a asp-action="Index" asp-controller="Home">Главная
+            </a></li><li><a asp-action="Index" asp-controller="Band">Лента
+            </a></li>
+          </ul>
+          <ul>
+            <li><a asp-action="Index" asp-controller="Profile">Мой профиль
+            </a></li><li><a asp-action="Index" asp-controller="Feedback">Обратная связь
+            </a></li>
+          </ul>
+        </nav>
+      </div>
+      <p>&copy; 2018 ExcellentNonsense</p>
+    </footer>
+  </div>
+  @RenderSection("Scripts", false)
+</body>
+</html>

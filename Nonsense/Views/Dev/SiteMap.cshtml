@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>SiteMap</title>
+  <style>
+    a {
+      color: hsl(0, 0%, 0%);
+      font-size: 1.2rem;
+      line-height: 1.5rem;
+      text-decoration: none;
+    }
+    a:hover {
+      color: hsl(0, 60%, 50%);
+    }
+  </style>
+</head>
+<body>
+  <a asp-action="Index" asp-controller="Home">Home -> Index</a><br />
+  <a asp-action="Index" asp-controller="Profile">Profile -> Index</a><br />
+  <a asp-action="Index" asp-controller="Feedback">Feedback -> Index</a><br />
+  <a asp-action="Index" asp-controller="Band">Band -> Index</a><br />
+</body>
+</html>

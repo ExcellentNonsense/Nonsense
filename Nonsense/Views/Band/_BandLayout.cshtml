@@ -1,18 +1,24 @@
 ﻿@{
-    ViewBag.Title = "Лента";
-    ViewBag.ShowSpentTime = true;
+  Layout = "_Layout";
+  ViewBag.Title = "Лента";
+  ViewBag.ShowSpentTime = true;
 }
 
 @section Styles {
-    <link href="~/lib/stylesheets/pages/band.css" rel="stylesheet" />
+  <link href="~/css/pages/band.css" rel="stylesheet" />
+  @RenderSection("Styles", false)
 }
 
 @section Scripts {
-    <script src="~/lib/javascripts/band.js"></script>
+  <script src="~/js/band.js"></script>
+  @RenderSection("Scripts", false)
 }
 
 <h1>Новые сообщения</h1>
-<div id="messages_container"></div>
+<h1>Новое на Flickr</h1>
+
+<div id="items_container"></div>
+@RenderBody()
 
 <div id="page_overlay">
   <div>
@@ -34,13 +40,3 @@
     <input type="button" onclick="hideOverlay();" value="Продолжить" />
   </div>
 </div>
-<template id="message_tmpl">
-<div class="message">
-  <p class="msg_info"><span class="msg_info_from">Andrew</span> &ndash; 17 июня</p>
-  <div class="msg_image">
-    <img src="" />
-    <div class="msg_image_cover_color"></div>
-    <div class="msg_image_cover_bubbles"></div>
-  </div>
-</div>
-</template>

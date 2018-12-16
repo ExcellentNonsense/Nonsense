@@ -1,0 +1,12 @@
+﻿/* main
+   ========================================================================== */
+.item .item_image_source {
+  padding: 0 0 0 15px;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.item .item_image_source a {
+  color: var(--main_color);
+  text-decoration: none;
+}

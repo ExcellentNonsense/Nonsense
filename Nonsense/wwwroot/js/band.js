@@ -1,29 +1,52 @@
-﻿window.onload = function () {
+﻿"use strict";
+
+window.addEventListener("scroll", function () {
+  console.log(window.pageYOffset);
+  console.log(document.documentElement.clientHeight);
+  console.log(document.documentElement.scrollHeight);
+  if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+    fillBand();
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
   startTimer();
   switchOnReminder();
   fillBand();
-}
+});
 
 const timerInterval = 121;
 const timerDuration = 3600000;
+
 function startTimer() {
-  var timerId = setInterval(updateTime, timerInterval);
-  setTimeout(function () { clearInterval(timerId) }, timerDuration);
+  let timerId = setInterval(updateTime, timerInterval);
+
+  setTimeout(
+    function () {
+      clearInterval(timerId);
+    },
+    timerDuration
+  );
 }
 
-var passedMs = 0;
+let passedMs = 0;
 function updateTime() {
+  let clock = document.getElementById("spent_time");
+
   passedMs += timerInterval;
-  var clock = document.getElementById("spent_time");
   clock.innerHTML = convertMsToTime(passedMs);
 }
 
 function convertMsToTime(ms) {
   if (ms >= 1) {
-    var milliseconds = ms, seconds = 0, minutes = 0;
+    let milliseconds = ms;
+    let seconds = 0;
+    let minutes = 0;
+
     if (ms > 999) {
       milliseconds = ms % 1000;
-      var secCount = (ms - milliseconds) / 1000;
+      let secCount = (ms - milliseconds) / 1000;
+
       if (secCount > 59) {
         seconds = secCount % 60;
         minutes = (secCount - seconds) / 60;
@@ -61,45 +84,37 @@ function switchOnReminder() {
 }
 
 function showOverlay(suggestionNumber) {
-  var formerSuggestion = document.querySelector("#page_overlay .active_suggestion");
-    suggestion = document.querySelectorAll("#page_overlay p")[suggestionNumber],
-    pageOverlay = document.getElementById("page_overlay");
+  let formerSuggestion = document.querySelector("#page_overlay .active_suggestion");
+  let suggestion = document.querySelectorAll("#page_overlay p")[suggestionNumber];
+  let pageOverlay = document.getElementById("page_overlay");
 
   if (formerSuggestion != null) {
     formerSuggestion.classList.remove("active_suggestion");
   }
+
   suggestion.classList.add("active_suggestion");
   pageOverlay.style.opacity = "1";
   pageOverlay.style.display = "block";
 
   if (suggestionNumber == 2) {
-    var continueBtn = document.querySelector("#page_overlay input");
+    let continueBtn = document.querySelector("#page_overlay input");
     continueBtn.style.display = "none";
   }
 }
 
 function hideOverlay() {
-  var suggestion_lines = document.querySelectorAll("#page_overlay .active_suggestion span");
+  let suggestion_lines = document.querySelectorAll("#page_overlay .active_suggestion span");
   suggestion_lines[0].classList.add("suggestion_row1");
   suggestion_lines[1].classList.add("suggestion_row2");
   suggestion_lines[2].classList.add("suggestion_row3");
 
-  var pageOverlay = document.getElementById("page_overlay");
+  let pageOverlay = document.getElementById("page_overlay");
   pageOverlay.style.opacity = "0";
-  setTimeout(function () {
-    pageOverlay.style.display = "none";
-  }, 900);
-  
-}
 
-function fillBand() {
-  var imagesCount = 4;
-  for (var i = 1; i <= imagesCount; i++) {
-    var messageTmpl = document.getElementById("message_tmpl"),
-      img = messageTmpl.content.querySelector("img");
-    img.src = "/lib/content/images/" + i + ".jpg";
-    var message = document.importNode(messageTmpl.content, true),
-      messagesContainer = document.getElementById("messages_container");
-    messagesContainer.appendChild(message);
-  }
+  setTimeout(
+    function () {
+      pageOverlay.style.display = "none";
+    },
+    900
+  );
 }

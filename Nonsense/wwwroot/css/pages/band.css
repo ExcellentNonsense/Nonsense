@@ -20,36 +20,28 @@
 
 /* main
    ========================================================================== */
-.message {
+.item {
   padding: 0 0 5px 0;
   margin: 0 0 20px 0;
   border-bottom: 1px solid hsl(0, 0%, 90%);
 }
-.message:last-child {
+.item:last-child {
   padding: 0;
   margin: 0;
   border-bottom: none;
 }
-.message .msg_info {
-  padding: 0 0 0 15px;
-  margin: 0;
-  font-size: 1.2rem;
-  color: var(--main_color);
-}
-.message .msg_info_from {
-  font-weight: bold;
-}
-/* msg_image
+/* item_image
 _____________________________________________________________________________ */
-.message .msg_image {
+.item .item_image {
   position: relative;
   display: inline-block;
+  overflow: hidden;
 }
-.message .msg_image img {
+.item .item_image img {
   max-width: 100%;
   transform: scale(0.8);
 }
-.message .msg_image_cover_color {
+.item .item_image_cover_color {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -57,18 +49,18 @@ _____________________________________________________________________________ */
   left: 0;
   background: hsl(227, 64%, 98.6%);
 }
-.message .msg_image_cover_bubbles {
+.item .item_image_cover_bubbles {
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  background: url(../../images/msg_image_cover.png);
+  background: url(../../images/item_image_cover.png);
   background-size: cover;
   opacity: 0.08;
 }
-.message .msg_image:hover img,
-.message .msg_image:focus img {
+.item .item_image:hover img,
+.item .item_image:focus img {
   animation: scale_up_down 40s;
 }
 @keyframes scale_up_down {
@@ -80,8 +72,8 @@ _____________________________________________________________________________ */
     transform: scale(0.8);
   }
 }
-.message .msg_image:hover .msg_image_cover_color,
-.message .msg_image:focus .msg_image_cover_color {
+.item .item_image:hover .item_image_cover_color,
+.item .item_image:focus .item_image_cover_color {
   animation: uncover_color 40s;
 }
 @keyframes uncover_color {
@@ -93,8 +85,8 @@ _____________________________________________________________________________ */
     opacity: 1;
   }
 }
-.message .msg_image:hover .msg_image_cover_bubbles,
-.message .msg_image:focus .msg_image_cover_bubbles {
+.item .item_image:hover .item_image_cover_bubbles,
+.item .item_image:focus .item_image_cover_bubbles {
   animation: uncover_bubbles 40s;
 }
 @keyframes uncover_bubbles {

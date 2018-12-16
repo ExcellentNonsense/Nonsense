@@ -6,16 +6,17 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="wwwroot\lib\images\" />
-    <Folder Include="wwwroot\lib\javascripts\" />
-    <Folder Include="wwwroot\lib\content\" />
-    <Folder Include="wwwroot\lib\stylesheets\globals\" />
-    <Folder Include="wwwroot\lib\stylesheets\modules\" />
-    <Folder Include="wwwroot\lib\stylesheets\pages\" />
+    <Folder Include="wwwroot\content\" />
+    <Folder Include="wwwroot\css\modules\" />
+    <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 
 </Project>

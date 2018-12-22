@@ -7,12 +7,12 @@
 }
 
 <h1>Обратная связь</h1>
-<form method="post" action="">
-  <textarea name="message" placeholder="Привет! О чем думаете?"></textarea><br />
-  <div id="scene">
-    <div id="cube">
-      <input id="top" type="button" value="Благодарим вас" />
-      <input id="front" type="button" value="Отправить сообщение" />
+<form method="post" action="" class="feedback-form">
+  <textarea name="message" class="feedback-form__message" placeholder="Привет! О чем думаете?"></textarea>
+  <div class="cube-button">
+    <div class="cube-button__faces-container">
+      <input type="button" value="Благодарим вас" class="cube-button__face cube-button__face--top"  />
+      <input type="button" value="Отправить сообщение" class="cube-button__face cube-button__face--front" />
     </div>
   </div>
 </form>

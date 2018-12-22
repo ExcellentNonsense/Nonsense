@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
 
 namespace Nonsense.Infrastructure.TagHelpers {
-    [HtmlTargetElement("a", Attributes = "is-active-route")]
+    [HtmlTargetElement("a", Attributes = "th-is-active-route")]
     public class ActiveRouteTagHelper : TagHelper {
         [HtmlAttributeName("asp-controller")]
         public string Controller { get; set; }
@@ -24,10 +24,10 @@ namespace Nonsense.Infrastructure.TagHelpers {
                 !string.IsNullOrWhiteSpace(Action) &&
                 Controller.Equals(currentController, StringComparison.CurrentCultureIgnoreCase) &&
                 Action.Equals(currentAction, StringComparison.CurrentCultureIgnoreCase)) {
-                output.Attributes.SetAttribute("class", "active_link");
+                output.Attributes.SetAttribute("class", "nav-header__active-link");
             }
 
-            output.Attributes.RemoveAll("is-active-route");
+            output.Attributes.RemoveAll("th-is-active-route");
         }
     }
 }

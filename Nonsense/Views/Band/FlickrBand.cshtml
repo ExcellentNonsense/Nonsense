@@ -10,13 +10,15 @@
   <script src="~/js/band_flickr.js"></script>
 }
 
-<template id="item_tmpl">
-  <div class="item">
-    <p class="item_image_source"></p>
-    <div class="item_image">
-      <img src="" />
-      <div class="item_image_cover_color"></div>
-      <div class="item_image_cover_bubbles"></div>
+@section ServiceContent {
+  <template class="band-item-template js-band-item-template">
+    <div class="band-item">
+      <p class="band-item__image-source-info js-band-item__image-source-info"></p>
+      <div class="band-item__image-container">
+        <img src="" class="band-item__image js-band-item__image" />
+        <div class="band-item__image-cover-color"></div>
+        <div class="band-item__image-cover-bubbles"></div>
+      </div>
     </div>
-  </div>
-</template>
+  </template>
+}

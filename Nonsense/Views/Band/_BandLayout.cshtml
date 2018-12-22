@@ -17,26 +17,29 @@
 <h1>Новые сообщения</h1>
 <h1>Новое на Flickr</h1>
 
-<div id="items_container"></div>
-@RenderBody()
+<div class="band-items-container js-band-items-container"></div>
 
-<div id="page_overlay">
-  <div>
-    <p>
-      <span>Вы занимаетесь ерундой уже 20 минут. За это</span>
-      <span>время можно прочитать 15 страниц</span>
-      <span>произведения "Война и мир".</span>
-    </p>
-    <p>
-      <span>Зачем тратить на ерунду 40 минут?</span>
-      <span>Вы могли бы пробежать</span>
-      <span>12 километров.</span>
-    </p>
-    <p>
-      <span>Вы исчерпали свой лимит ерунды</span>
-      <span>на сегодня и не можете</span>
-      <span>продолжить.</span>
-    </p>
-    <input type="button" onclick="hideOverlay();" value="Продолжить" />
+@section ServiceContent {
+  @RenderSection("ServiceContent", false)
+
+  <div class="page-overlay js-page-overlay">
+    <div class="page-overlay__suggestions-container">
+      <p class="page-overlay__suggestion js-page-overlay__suggestion">
+        <span class="page-overlay__suggestion-row js-page-overlay__suggestion-row">Вы занимаетесь ерундой уже 20 минут. За это</span>
+        <span class="page-overlay__suggestion-row js-page-overlay__suggestion-row">время можно прочитать 15 страниц</span>
+        <span class="page-overlay__suggestion-row js-page-overlay__suggestion-row">произведения "Война и мир".</span>
+      </p>
+      <p class="page-overlay__suggestion js-page-overlay__suggestion">
+        <span class="page-overlay__suggestion-row js-page-overlay__suggestion-row">Зачем тратить на ерунду 40 минут?</span>
+        <span class="page-overlay__suggestion-row js-page-overlay__suggestion-row">Вы могли бы пробежать</span>
+        <span class="page-overlay__suggestion-row js-page-overlay__suggestion-row">12 километров.</span>
+      </p>
+      <p class="page-overlay__suggestion js-page-overlay__suggestion">
+        <span class="page-overlay__suggestion-row js-page-overlay__suggestion-row">Вы исчерпали свой лимит ерунды</span>
+        <span class="page-overlay__suggestion-row js-page-overlay__suggestion-row">на сегодня и не можете</span>
+        <span class="page-overlay__suggestion-row js-page-overlay__suggestion-row">продолжить.</span>
+      </p>
+      <input type="button" class="page-overlay__btn-hide-overlay js-page-overlay__btn-hide-overlay" value="Продолжить" />
+    </div>
   </div>
-</div>
+}

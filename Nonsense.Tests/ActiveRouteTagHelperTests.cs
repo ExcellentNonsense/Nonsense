@@ -35,7 +35,7 @@ namespace Nonsense.Tests {
             tagHelper.Process(context, output);
 
             // Assert
-            Assert.Equal("active_link", output.Attributes["class"].Value);
+            Assert.Equal("nav-header__active-link", output.Attributes["class"].Value);
         }
 
         [Fact]

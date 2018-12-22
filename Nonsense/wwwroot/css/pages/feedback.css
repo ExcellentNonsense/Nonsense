@@ -1,46 +1,54 @@
-main form {
+.feedback-form {
   padding: 0 80px;
 }
-main textarea {
+
+.feedback-form__message {
   width: 100%;
   height: 160px;
   margin: 0 0 10px 0;
   resize: none;
 }
+
 /* submit button
 _____________________________________________________________________________ */
-main input[type="button"] {
-  margin: 0 0 0 3px;
-  background: hsl(227, 64%, 98.6%);
-  color: var(--main_color);
-  font-size: 1.2rem;
-  box-shadow: 0 0 3px hsl(279, 100%, 67%);
-  border: 3px solid var(--base_color);
-  border-radius: 0;
-  cursor: pointer;
-}
-#scene {
+.cube-button {
   width: 180px;
   height: 40px;
   perspective: 800px;
 }
-#cube {
+
+.cube-button__faces-container {
   width: 100%;
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
   transition: 0.5s;
 }
-#scene:hover #cube{
+
+.cube-button:hover .cube-button__faces-container,
+.cube-button:focus .cube-button__faces-container{
   transform: rotateX(-90deg);
 }
-#top {
+
+.cube-button__face {
+  margin: 0 0 0 3px;
+  background: hsl(227, 64%, 98.6%);
+  color: var(--main-color);
+  font-size: 1.2rem;
+  box-shadow: 0 0 3px hsl(279, 100%, 67%);
+  border: 3px solid var(--base-color);
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.cube-button__face--top {
   width: 100%;
   height: 100%;
   transform: rotateX(90deg) translate3d(0, 0, 20px);
   position: absolute;
 }
-#front {
+
+.cube-button__face--front {
   width: 100%;
   height: 100%;
   transform: rotateX(0deg) translate3d(0, 0, 20px);

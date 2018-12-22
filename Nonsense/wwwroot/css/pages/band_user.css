@@ -1,11 +1,10 @@
-﻿/* main
-   ========================================================================== */
-.item .item_message_info {
+﻿.band-item__message-info {
   padding: 0 0 0 15px;
   margin: 0;
   font-size: 1.2rem;
-  color: var(--main_color);
+  color: var(--main-color);
 }
-.item .item_message_info_from {
+
+.band-item__message-sender {
   font-weight: bold;
 }

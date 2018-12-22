@@ -9,43 +9,43 @@
   @RenderSection("Styles", false)
 </head>
 <body>
-  <div id="bg_time_tags" class="bg_container"></div>
-  <div id="bg_water" class="bg_container"></div>
-  <div id="bg_glare" class="bg_container"></div>
-  <div id="bg_border_shadow" class="bg_container"></div>
-  <div id="bg_strip_top">
-    <div class="bg_strip_left"></div>
-    <div class="bg_strip_center"></div>
-    <div class="bg_strip_right"></div>
+  <div id="bg-time-tags" class="bg-container"></div>
+  <div id="bg-water" class="bg-container"></div>
+  <div id="bg-glare" class="bg-container"></div>
+  <div id="bg-border-shadow" class="bg-container"></div>
+  <div id="bg-strip-top">
+    <div class="bg-strip-left"></div>
+    <div class="bg-strip-center"></div>
+    <div class="bg-strip-right"></div>
   </div>
-  <div id="bg_strip_bottom">
-    <div class="bg_strip_left"></div>
-    <div class="bg_strip_center"></div>
-    <div class="bg_strip_right"></div>
+  <div id="bg-strip-bottom">
+    <div class="bg-strip-left"></div>
+    <div class="bg-strip-center"></div>
+    <div class="bg-strip-right"></div>
   </div>
 
-  <div id="top"></div>
+  <div id="page-top"></div>
   <div id="wrapper">
     <header>
-      <div id="logo_user_line_bg"></div>
-      <div id="logo_user_line">
-        <a asp-action="Index" asp-controller="Home" id="logo"></a>
-        <div id="user">
-          <p id="user_name"><a asp-action="Index" asp-controller="Profile">ALEX ADONNIX</a></p>
+      <div class="header-bg"></div>
+      <div class="header">
+        <a asp-action="Index" asp-controller="Home" class="site-logo"></a>
+        <div class="logged-in-user">
+          <p class="logged-in-user__name"><a asp-action="Index" asp-controller="Profile">ALEX ADONNIX</a></p>
           @if (ViewBag.ShowSpentTime ?? false) {
-            <div id="name_time_separator"></div>
-            <div id="spent_time">00:00:000</div>
+            <div class="logged-in-user__name-time-separator"></div>
+            <div class="logged-in-user__spent-time js-logged-in-user__spent-time">00:00:000</div>
           }
           else {
-            <div id="user_photo"></div>
+            <div class="logged-in-user__photo"></div>
           }
         </div>
       </div>
-      <div id="nav_line">
+      <div class="nav-header">
         <nav>
-          <ul>
-            <li><a asp-action="Index" asp-controller="Home" is-active-route>Главная
-            </a></li><li><a asp-action="Index" asp-controller="Band" is-active-route>Лента
+          <ul class="nav-header__links-container">
+            <li class="nav-header__link"><a asp-action="Index" asp-controller="Home" th-is-active-route>Главная
+            </a></li><li class="nav-header__link"><a asp-action="Index" asp-controller="Band" th-is-active-route>Лента
             </a></li>
           </ul>
         </nav>
@@ -55,24 +55,25 @@
       @RenderBody()
     </main>
     <footer>
-      <a href="#top" id="scroll_to_top_btn">▲</a>
-      <div id="footer_nav">
+      <a href="#page-top" id="btn-scroll-to-top">▲</a>
+      <div class="nav-footer">
         <nav>
-          <ul>
-            <li><a asp-action="Index" asp-controller="Home">Главная
-            </a></li><li><a asp-action="Index" asp-controller="Band">Лента
+          <ul class="nav-footer__links-container">
+            <li class="nav-footer__link"><a asp-action="Index" asp-controller="Home">Главная
+            </a></li><li class="nav-footer__link"><a asp-action="Index" asp-controller="Band">Лента
             </a></li>
           </ul>
-          <ul>
-            <li><a asp-action="Index" asp-controller="Profile">Мой профиль
-            </a></li><li><a asp-action="Index" asp-controller="Feedback">Обратная связь
+          <ul class="nav-footer__links-container">
+            <li class="nav-footer__link"><a asp-action="Index" asp-controller="Profile">Мой профиль
+            </a></li><li class="nav-footer__link"><a asp-action="Index" asp-controller="Feedback">Обратная связь
             </a></li>
           </ul>
         </nav>
       </div>
-      <p>&copy; 2018 ExcellentNonsense</p>
+      <p id="footer-copyright">&copy; 2018 ExcellentNonsense</p>
     </footer>
   </div>
+  @RenderSection("ServiceContent", false)
   <script src="~/js/common.js"></script>
   @RenderSection("Scripts", false)
 </body>

@@ -1,29 +1,35 @@
-main img {
+.user-photo {
   padding: 0 0 0 15px;
   max-width: 295px;
 }
-main dl {
+
+.data-table {
   padding: 0 80px;
   margin: 0;
 }
-main dl dt,
-main dl dd {
+
+.data-table__key,
+.data-table__val {
   width: 230px;
   margin: 0;
   display: inline-block;
   border-top: 1px solid hsl(0, 0%, 90%);
   vertical-align: top;
 }
-main dl dt:first-of-type,
-main dl dd:first-of-type {
+
+.data-table__key:first-of-type,
+.data-table__val:first-of-type {
   border: none;
 }
-main dl dt {
+
+.data-table__key {
   padding: 0 10px 0 0;
 }
-main dl dd {
+
+.data-table__val {
   font-style: italic;
 }
-main dl:nth-of-type(2) dd:last-of-type {
+
+.data-table:nth-of-type(2) .data-table__val:last-of-type {
   font-weight: bold;
 }

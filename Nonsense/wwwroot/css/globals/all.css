@@ -135,12 +135,6 @@ h3 {
 }
 
 
-#page-top {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
 #wrapper {
   width: 640px;
   min-height: 100vh;
@@ -289,17 +283,28 @@ _____________________________________________________________________________ */
   background: hsl(279, 40%, 27%);
 }
 
-#btn-scroll-to-top {
+.btn-scroll-to-top {
   width: 100%;
-  height: 16px;
+  height: 20px;
   padding: 4px 0 0 0;
   display: block;
+  border: none;
+  outline: none;
   background: var(--highlight-color);
   box-shadow: inset 0 5px 2px 1px hsl(279, 40%, 27%);
-  text-align: center;
-  text-decoration: none;
   font-size: 14px;
   color: hsl(279, 40%, 27%);
+  cursor: pointer;
+}
+
+.btn-scroll-to-top:active {
+  border-bottom: 1px solid #fff;
+  box-shadow: inset 0 5px 2px 2px hsl(279, 40%, 27%);
+  padding: 7px 0 0 0;
+  text-shadow:
+    -1px -1px 0 hsl(0, 0%, 100%),
+    1px -1px 0 hsl(0, 0%, 100%),
+    0 1px 0 hsl(279, 40%, 27%);
 }
 
 .nav-footer {

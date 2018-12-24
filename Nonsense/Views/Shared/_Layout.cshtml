@@ -24,7 +24,6 @@
     <div class="bg-strip-right"></div>
   </div>
 
-  <div id="page-top"></div>
   <div id="wrapper">
     <header>
       <div class="header-bg"></div>
@@ -55,7 +54,7 @@
       @RenderBody()
     </main>
     <footer>
-      <a href="#page-top" id="btn-scroll-to-top">▲</a>
+      <button class="btn-scroll-to-top js-btn-scroll-to-top">▲</button>
       <div class="nav-footer">
         <nav>
           <ul class="nav-footer__links-container">
@@ -74,7 +73,8 @@
     </footer>
   </div>
   @RenderSection("ServiceContent", false)
-  <script src="~/js/common.js"></script>
+  <script src="~/js/global.js"></script>
+  <script src="~/js/utils.js"></script>
   @RenderSection("Scripts", false)
 </body>
 </html>

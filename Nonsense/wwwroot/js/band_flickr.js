@@ -15,19 +15,21 @@ let bandFlickr = {};
     if (response.stat === "ok") {
       let itemTmpl = document.querySelector(".js-band-item-template");
       response.images.forEach((image) => {
-        let item = document.importNode(itemTmpl.content, true);
+        if (image.url_z !== null) {
+          let item = document.importNode(itemTmpl.content, true);
 
-        let itemImgSource = item.querySelector(".js-band-item__image-source-info");
-        let imgLink = document.createElement("a");
-        imgLink.href = "https://www.flickr.com/photos/" + image.owner + "/" + image.id;
-        imgLink.target = "_blank";
-        imgLink.textContent = image.title;
-        itemImgSource.appendChild(imgLink);
+          let itemImgSource = item.querySelector(".js-band-item__image-source-info");
+          let imgLink = document.createElement("a");
+          imgLink.href = "https://www.flickr.com/photos/" + image.owner + "/" + image.id;
+          imgLink.target = "_blank";
+          imgLink.textContent = image.title;
+          itemImgSource.appendChild(imgLink);
 
-        let itemImg = item.querySelector(".js-band-item__image");
-        itemImg.src = image.url_z;
+          let itemImg = item.querySelector(".js-band-item__image");
+          itemImg.src = image.url_z;
 
-        itemsContainer.appendChild(item);
+          itemsContainer.appendChild(item);
+        }
       });
     }
     else {

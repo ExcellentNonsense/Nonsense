@@ -1,0 +1,79 @@
+﻿/* btn-scroll-to-top
+   ========================================================================== */
+
+.btn-scroll-to-top {
+  width: 100%;
+  height: 20px;
+  padding: 4px 0 0 0;
+  display: block;
+  border: none;
+  outline: none;
+  background: var(--highlight-color);
+  box-shadow: inset 0 5px 2px 1px hsl(279, 40%, 27%);
+  font-size: 14px;
+  color: hsl(279, 40%, 27%);
+  cursor: pointer;
+}
+
+.btn-scroll-to-top:active {
+  border-bottom: 1px solid #fff;
+  box-shadow: inset 0 5px 2px 2px hsl(279, 40%, 27%);
+  padding: 7px 0 0 0;
+  text-shadow:
+    -1px -1px 0 hsl(0, 0%, 100%),
+    1px -1px 0 hsl(0, 0%, 100%),
+    0 1px 0 hsl(279, 40%, 27%);
+}
+
+/* nav-footer
+   ========================================================================== */
+
+.nav-footer {
+  padding: 20px 5px 0;
+}
+
+.nav-footer nav {
+  display: flex;
+}
+
+.nav-footer__links-container {
+  width: 230px;
+  padding: 0 0 0 15px;
+  margin: 0 170px 0 0;
+  list-style: none;  
+}
+
+.nav-footer__links-container:last-child {
+   margin: 0;
+}
+
+.nav-footer__link {
+  padding: 0 0 5px;
+}
+
+.nav-footer__link:last-child {
+  padding: 0;
+}
+
+.nav-footer__link a {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  color: hsl(0, 0%, 100%);
+  text-decoration: none;
+}
+
+.nav-footer__link a:hover,
+.nav-footer__link a:focus {
+  text-decoration: underline;
+}
+
+/* footer-copyright
+   ========================================================================== */
+
+#footer-copyright {
+  padding: 20px 0;
+  margin: 0;
+  font-size: 1.4rem;
+  color: hsla(0, 0%, 100%, 0.6);
+  text-align: center;
+}

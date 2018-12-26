@@ -6,6 +6,7 @@ let bandFlickr = {};
   this.fillBand = () => {
     let flickrImagesUrl = "/Band/GetFlickrImages";
 
+    band.toggleDataLoadingNotification();
     utils.getJSON(flickrImagesUrl, loadFlickrImagesToBand);
   };
 
@@ -47,5 +48,7 @@ let bandFlickr = {};
 
       itemsContainer.appendChild(error);
     }
+
+    band.toggleDataLoadingNotification();
   }
 }).apply(bandFlickr);

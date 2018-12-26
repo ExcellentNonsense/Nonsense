@@ -1,5 +1,6 @@
 /* header
    ========================================================================== */
+
 .logged-in-user__spent-time {
   width: 100%;
   height: 34px;
@@ -21,6 +22,7 @@
 
 /* main
    ========================================================================== */
+
 .band-item {
   padding: 0 0 5px 0;
   margin: 0 0 20px 0;
@@ -32,8 +34,10 @@
   margin: 0;
   border-bottom: none;
 }
+
 /* band-item__image
-_____________________________________________________________________________ */
+   ========================================================================== */
+
 .band-item__image-container {
   position: relative;
   display: inline-block;
@@ -110,8 +114,119 @@ _____________________________________________________________________________ */
     opacity: 0.08;
   }
 }
+
+/* data-loading-notification
+   ========================================================================== */
+
+.data-loading-notification {
+  width: 120px;
+  margin: 20px auto 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto 50px auto;
+  justify-items: center;
+  align-items: end;
+}
+
+.js-data-loading-notification--hidden {
+  visibility: hidden;
+}
+
+.data-loading-notification__top {
+  width: 100%;
+  height: 1px;
+  grid-column: 1 / 5;
+  border-style: solid;
+  border-color: var(--main-color);
+  border-width: 5px 1px;
+  background: var(--base-color);
+}
+
+.data-loading-notification__drop {
+  width: 0;
+  height: 0;
+  transform: translateY(-50px);
+  background: radial-gradient(farthest-corner,
+    var(--base-color) 43%,
+    var(--main-color) 45%
+  );
+  clip-path: polygon(50% 0%, 100% 55%, 100% 80%, 75% 100%, 25% 100%, 0% 80%, 0% 55%);
+}
+
+.js-data-loading-notification__drop--animated {
+  animation: falling-drop 1s infinite cubic-bezier(.28, 0, 0, -0.7);
+}
+
+.data-loading-notification__drop--number-2 {
+  animation-delay: .3s;
+}
+
+.data-loading-notification__drop--number-3 {
+  animation-delay: .85s;
+}
+
+.data-loading-notification__drop--number-4 {
+  animation-delay: .55s;
+}
+
+@keyframes falling-drop {
+  0% {
+    width: 7px;
+  }
+  15% {
+    width: 15px;
+    height: 25px;
+    transform: translateY(-25px);
+  }
+  80% {
+    width: 15px;
+    height: 25px;
+    opacity: 1;
+    transform: translateY(10px);
+  }
+  90% {
+    width: 20px;
+    height: 5px;
+  }
+  100% {
+    width: 30px;
+    height: 0;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.data-loading-notification__message-part {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--main-color);
+}
+
+.js-data-loading-notification__message-part--animated {
+  animation: flashing-letters 1s infinite linear;
+}
+
+.data-loading-notification__message-part--number-2 {
+  animation-delay: .3s;
+}
+
+.data-loading-notification__message-part--number-3 {
+  animation-delay: .85s;
+}
+
+.data-loading-notification__message-part--number-4 {
+  animation-delay: .55s;
+}
+
+@keyframes flashing-letters {
+  100% {
+    color: var(--base-color);
+  }
+}
+
 /* page-overlay
-_____________________________________________________________________________ */
+   ========================================================================== */
+
 .page-overlay {
   width: 100%;
   height: 100%;

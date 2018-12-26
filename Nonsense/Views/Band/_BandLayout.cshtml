@@ -19,6 +19,23 @@
 
 <div class="band-items-container js-band-items-container"></div>
 
+<div class="data-loading-notification js-data-loading-notification js-data-loading-notification--hidden">
+  <div class="data-loading-notification__top"></div>
+
+  <div class="data-loading-notification__drop js-data-loading-notification__drop"></div>
+  <div class="data-loading-notification__drop js-data-loading-notification__drop data-loading-notification__drop--number-2"></div>
+  <div class="data-loading-notification__drop js-data-loading-notification__drop data-loading-notification__drop--number-3"></div>
+  <div class="data-loading-notification__drop js-data-loading-notification__drop data-loading-notification__drop--number-4"></div>
+
+  <span class="data-loading-notification__message-part js-data-loading-notification__message-part">за</span>
+  <span class="data-loading-notification__message-part js-data-loading-notification__message-part 
+        data-loading-notification__message-part--number-2">гр</span>
+  <span class="data-loading-notification__message-part js-data-loading-notification__message-part 
+        data-loading-notification__message-part--number-3">уз</span>
+  <span class="data-loading-notification__message-part js-data-loading-notification__message-part 
+        data-loading-notification__message-part--number-4">ка</span>
+</div>
+
 @section ServiceContent {
   @RenderSection("ServiceContent", false)
 

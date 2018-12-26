@@ -130,4 +130,22 @@ let band = {};
       bandFlickr.fillBand();
     }
   };
+
+  this.toggleDataLoadingNotification = () => {
+    let notification = document.querySelector(".js-data-loading-notification");
+
+    notification.classList.toggle("js-data-loading-notification--hidden");
+
+    let drops = notification.querySelectorAll(".js-data-loading-notification__drop");
+
+    drops.forEach((drop) => {
+      drop.classList.toggle("js-data-loading-notification__drop--animated");
+    });
+
+    let messageParts = notification.querySelectorAll(".js-data-loading-notification__message-part");
+
+    messageParts.forEach((part) => {
+      part.classList.toggle("js-data-loading-notification__message-part--animated");
+    });
+  };
 }).apply(band);

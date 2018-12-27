@@ -148,4 +148,33 @@ let band = {};
       part.classList.toggle("js-data-loading-notification__message-part--animated");
     });
   };
+
+  this.showDataLoadingError = () => {
+    let itemsContainer = document.querySelector(".js-band-items-container");
+
+    let errElClassName = "js-band-loading-images-error";
+    let errElMessage = "Сервис недоступен. Попробуйте обновить страницу.";
+
+    let existingError = itemsContainer.querySelector("." + errElClassName);
+    if (existingError !== null) {
+      itemsContainer.removeChild(existingError);
+    }
+
+    let error = document.createElement("p");
+    error.className = errElClassName;
+    error.style.textAlign = "center";
+    error.textContent = errElMessage;
+
+    let head = document.createElement("pre");
+    head.textContent += "_\r\n";
+    head.textContent += "_/*\\_\r\n";
+    head.textContent += "/_____\\\r\n";
+    head.textContent += "| %,% |\r\n";
+    head.textContent += "\\ (-) /\r\n";
+    head.textContent += "\\_'_/\r\n";
+
+    error.appendChild(head);
+
+    utils.insertAfter(error, itemsContainer);
+  };
 }).apply(band);

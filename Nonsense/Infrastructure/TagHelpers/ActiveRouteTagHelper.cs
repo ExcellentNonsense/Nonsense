@@ -21,12 +21,28 @@ namespace Nonsense.Infrastructure.TagHelpers {
             string currentAction = ViewContextData.RouteData.Values["Action"].ToString();
 
             if (!string.IsNullOrWhiteSpace(Controller) &&
-                !string.IsNullOrWhiteSpace(Action) &&
-                Controller.Equals(currentController, StringComparison.CurrentCultureIgnoreCase) &&
-                Action.Equals(currentAction, StringComparison.CurrentCultureIgnoreCase)) {
-                output.Attributes.SetAttribute("class", "nav-header__active-link");
+                !string.IsNullOrWhiteSpace(Action)) {
+
+                if (Controller.Equals(currentController, StringComparison.CurrentCultureIgnoreCase)) {
+
+                    if (Action.Equals(currentAction, StringComparison.CurrentCultureIgnoreCase)) {
+
+                        if (output.Attributes.ContainsName("th-nav-header")) {
+                            output.Attributes.SetAttribute("class", "th-nav-header__link--active");
+                        }
+                        else if (output.Attributes.ContainsName("th-nav-secondary")) {
+                            output.Attributes.SetAttribute("class", "th-nav-secondary__link--active");
+                        }
+                    }
+                    else if (Controller.Equals("Band", StringComparison.CurrentCultureIgnoreCase) &&
+                        output.Attributes.ContainsName("th-nav-header")) {
+                        output.Attributes.SetAttribute("class", "th-nav-header__link--active");
+                    }
+                }
             }
 
+            output.Attributes.RemoveAll("th-nav-header");
+            output.Attributes.RemoveAll("th-nav-secondary");
             output.Attributes.RemoveAll("th-is-active-route");
         }
     }

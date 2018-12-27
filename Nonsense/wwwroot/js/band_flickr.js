@@ -34,19 +34,7 @@ let bandFlickr = {};
       });
     }
     else {
-      let errElClassName = "js-band-loading-images-error";
-      let errElMessage = "Сервис недоступен. Попробуйте обновить страницу.";
-
-      let existingError = itemsContainer.querySelector("." + errElClassName);
-      if (existingError !== null) {
-        itemsContainer.removeChild(existingError);
-      }
-
-      let error = document.createElement("h1");
-      error.className = errElClassName;
-      error.textContent = errElMessage;
-
-      itemsContainer.appendChild(error);
+      band.showDataLoadingError();
     }
 
     band.toggleDataLoadingNotification();

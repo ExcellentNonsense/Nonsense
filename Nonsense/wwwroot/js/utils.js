@@ -19,4 +19,8 @@ let utils = {};
 
     request.send();
   };
+
+  this.insertAfter = (newNode, referenceNode) => {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  };
 }).apply(utils);

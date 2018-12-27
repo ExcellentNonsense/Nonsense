@@ -1,5 +1,6 @@
 ﻿main > h1,
-main > h2 {
+main > h2,
+main > h3 {
   padding: 0 0 0 15px;
 }
 

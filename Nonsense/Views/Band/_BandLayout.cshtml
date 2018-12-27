@@ -14,8 +14,15 @@
   @RenderSection("Scripts", false)
 }
 
-<h1>Новые сообщения</h1>
-<h1>Новое на Flickr</h1>
+<div class="nav-secondary">
+  <ul class="nav-secondary__links-container">
+    <li class="nav-secondary__link"><a asp-action="MyBand" asp-controller="Band" th-nav-secondary th-is-active-route>Моя
+    </a></li><li class="nav-secondary__link"><a asp-action="FlickrBand" asp-controller="Band" th-nav-secondary th-is-active-route>Flickr
+    </a></li>
+  </ul>
+</div>
+
+@RenderBody()
 
 <div class="band-items-container js-band-items-container"></div>
 

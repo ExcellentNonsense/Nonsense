@@ -61,8 +61,8 @@
 }
 
 .nav-header__link {
-  display: inline-block;
   margin: 0 5px 4px 0;
+  display: inline-block;
 }
 
 .nav-header__link a {
@@ -78,6 +78,6 @@
   border-bottom: 4px solid var(--main-color);
 }
 
-.nav-header__active-link {
+.th-nav-header__link--active {
   border-bottom: 4px solid var(--main-color);
 }

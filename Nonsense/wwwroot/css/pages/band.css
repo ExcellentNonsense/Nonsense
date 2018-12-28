@@ -36,11 +36,12 @@
 .nav-secondary__link {
   margin: 0 5px 0 0;
   display: inline-block;
-  transform: translateY(-2px);
+  transform: translateY(1px);
 }
 
 .nav-secondary__link a {
-  padding: 0 15px 4px 15px;
+  padding: 0 15px 3px 15px;
+  display: inline-block;
   font-size: 1.4rem;
   line-height: 2rem;
   text-transform: uppercase;

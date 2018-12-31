@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Nonsense.Controllers {
-    public class FeedbackController : Controller {
+namespace Nonsense.Web.Features.Home {
+    public class HomeController : Controller {
         public IActionResult Index() => View();
     }
 }

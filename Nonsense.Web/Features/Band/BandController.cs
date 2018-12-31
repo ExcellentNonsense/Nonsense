@@ -1,17 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using Nonsense.Infrastructure.WebServices;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Common;
 
-namespace Nonsense.Controllers {
+namespace Nonsense.Web.Features.Band {
     public class BandController : Controller {
         private readonly IFlickrService _flickrService;
 
@@ -61,7 +55,7 @@ namespace Nonsense.Controllers {
 
                     foreach (var imagesInfo in receivedImagesInfo) {
                         originalInfo = JObject.Parse(imagesInfo.ToString());
-                        transformedInfo = JsonUtilities.TransformJson(originalInfo, template);
+                        transformedInfo = Infrastructure.Utilities.Json.TransformJson(originalInfo, template);
 
                         truncatedImagesInfo.Add(transformedInfo);
                     }

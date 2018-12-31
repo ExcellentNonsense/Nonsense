@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace Common {
-    public static class JsonUtilities {
+namespace Nonsense.Infrastructure.Utilities {
+    public static class Json {
         public static JObject TransformJson(JObject original, JObject template) {
             var result = new JObject();
 

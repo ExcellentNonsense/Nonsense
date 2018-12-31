@@ -1,13 +1,12 @@
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.AspNetCore.Routing;
 using Nonsense.Infrastructure.TagHelpers;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Nonsense.Tests {
+namespace Nonsense.Tests.Infrastructure.TagHelpers {
     public class ActiveRouteTagHelperTests {
         [Fact]
         public void ProcessTag_ActiveHeaderLink_AddClass() {

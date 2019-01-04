@@ -2,20 +2,12 @@
   Layout = "_BandLayout";
 }
 
-@section Styles {
-  <link href="~/css/pages/band_user.css" rel="stylesheet" />
-}
-
-@section Scripts {
-  <script src="~/js/band_user.js"></script>
-}
-
 <h3>
   Мои новые сообщения.
 </h3>
 
 @section ServiceContent {
-  <template class="band-item-template js-band-item-template">
+  <template class="band-item-template js-band-item-template" data-band-type="my-band">
     <div class="band-item">
       <p class="band-item__message-info"><span class="band-item__message-sender"></span></p>
       <div class="band-item__image-container">

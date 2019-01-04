@@ -2,20 +2,12 @@
   Layout = "_BandLayout";
 }
 
-@section Styles {
-  <link href="~/css/pages/band_flickr.css" rel="stylesheet" />
-}
-
-@section Scripts {
-  <script src="~/js/band_flickr.js"></script>
-}
-
 <h3>
   Случайные изображения с Flickr в категории "Ерунда".
 </h3>
 
 @section ServiceContent {
-  <template class="band-item-template js-band-item-template">
+  <template class="band-item-template js-band-item-template" data-band-type="flickr-band">
     <div class="band-item">
       <p class="band-item__image-source-info js-band-item__image-source-info"></p>
       <div class="band-item__image-container">

@@ -61,6 +61,35 @@
   border-bottom: none;
 }
 
+/* band-user
+   ========================================================================== */
+
+.band-item__message-info {
+  padding: 0 0 0 15px;
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--main-color);
+}
+
+.band-item__message-sender {
+  font-weight: bold;
+}
+
+/* band-flickr
+   ========================================================================== */
+
+.band-item__image-source-info {
+  padding: 0 0 0 15px;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.band-item__image-source-info a {
+  color: var(--main-color);
+  text-decoration: none;
+}
+
 /* band-item
    ========================================================================== */
 
@@ -161,7 +190,7 @@
    ========================================================================== */
 
 .data-loading-notification {
-  width: 120px;
+  width: 150px;
   margin: 20px auto 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;

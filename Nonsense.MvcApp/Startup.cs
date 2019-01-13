@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Encodings.Web;
-using System.Text.Unicode;
-using System.Threading.Tasks;
+﻿using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Nonsense.Application.Gateways.WebServices;
-using Nonsense.Application.RandomImages.Interactors;
-using Nonsense.Infrastructure.WebServices;
+using Nonsense.Application;
+using Nonsense.Infrastructure;
 using Nonsense.MvcApp.Extensions;
-using Nonsense.MvcApp.Features.Band;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 namespace Nonsense.MvcApp {
     public class Startup {
@@ -21,11 +15,19 @@ namespace Nonsense.MvcApp {
         public void ConfigureServices(IServiceCollection services) {
             services.AddMvc().AddFeatureFolders();
 
+            // Create the HttpClientFactory to provide the HttpClient to the Typed Client classes.
+            services.AddHttpClient();
+
+            // Display Cyrillic characters in HTML without encoding.
             services.AddSingleton(HtmlEncoder
                 .Create(allowedRanges: new[] { UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic }));
+        }
 
-            services.AddHttpClient<IFlickrService, FlickrService>();
-            services.AddTransient<IGetFlickrImagesInteractor, GetFlickrImagesInteractor>();
+        // Register services with Autofac container.
+        public void ConfigureContainer(ContainerBuilder builder) {
+            builder.RegisterModule(new MvcAppModule());
+            builder.RegisterModule(new ApplicationModule());
+            builder.RegisterModule(new InfrastructureModule());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 namespace Nonsense.MvcApp.Features.Band {
     public class BandController : Controller {
         private readonly IGetFlickrImagesInteractor _getFlickrImagesInteractor;
-        private readonly GetFlickrImagesPresenter _getFlickrImagesPresenter = new GetFlickrImagesPresenter();
+        private readonly GetFlickrImagesPresenter _getFlickrImagesPresenter;
 
-        public BandController(IGetFlickrImagesInteractor getFlickrImagesInteractor) {
+        public BandController(IGetFlickrImagesInteractor getFlickrImagesInteractor, GetFlickrImagesPresenter presenter) {
             _getFlickrImagesInteractor = getFlickrImagesInteractor ?? throw new ArgumentNullException(nameof(getFlickrImagesInteractor));
+            _getFlickrImagesPresenter = presenter ?? throw new ArgumentNullException(nameof(presenter));
         }
 
         public IActionResult Index() {

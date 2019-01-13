@@ -7,9 +7,5 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <ProjectReference Include="..\Nonsense.Application\Nonsense.Application.csproj" />
-  </ItemGroup>
 
 </Project>

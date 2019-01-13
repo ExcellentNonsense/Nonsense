@@ -3,7 +3,9 @@ using System;
 using System.Linq;
 
 namespace Nonsense.MvcApp.Infrastructure {
+
     class FeatureControllerModelConvention : IControllerModelConvention {
+
         public void Apply(ControllerModel model) {
             if (model == null) throw new ArgumentNullException(nameof(model));
 

@@ -3,7 +3,9 @@ using Nonsense.MvcApp.Infrastructure;
 using System;
 
 namespace Nonsense.MvcApp.Extensions {
+
     public static class ServiceCollectionExtensions {
+
         public static IMvcBuilder AddFeatureFolders(this IMvcBuilder services) {
             if (services == null) throw new ArgumentNullException(nameof(services));
 

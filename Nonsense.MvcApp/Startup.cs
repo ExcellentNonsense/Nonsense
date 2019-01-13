@@ -9,7 +9,9 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 
 namespace Nonsense.MvcApp {
+
     public class Startup {
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services) {
@@ -32,7 +34,10 @@ namespace Nonsense.MvcApp {
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
-            app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment()) {
+                app.UseDeveloperExceptionPage();
+            }
+
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvc(routes => {

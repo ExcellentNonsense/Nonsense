@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 
 namespace Nonsense.MvcApp.Infrastructure {
+
     public class FeatureViewLocationExpander : IViewLocationExpander {
+
         public IEnumerable<string> ExpandViewLocations(ViewLocationExpanderContext context, IEnumerable<string> viewLocations) {
             if (context == null) throw new ArgumentNullException(nameof(context));
 

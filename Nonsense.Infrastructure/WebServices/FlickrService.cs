@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using Nonsense.Application.Gateways.WebServices;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using Nonsense.Application.Gateways.WebServices;
 
 namespace Nonsense.Infrastructure.WebServices {
+
     public class FlickrService : IFlickrService {
+
         private readonly HttpClient _client;
         private readonly string _apiKey;
 

@@ -2,12 +2,12 @@
 using Nonsense.Application.Interfaces;
 using Nonsense.Application.RandomImages.Responses;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Nonsense.Application.RandomImages.Interactors {
+
     public class GetFlickrImagesInteractor : IGetFlickrImagesInteractor {
+
         private readonly IFlickrService _flickrService;
 
         public GetFlickrImagesInteractor(IFlickrService flickrService) {

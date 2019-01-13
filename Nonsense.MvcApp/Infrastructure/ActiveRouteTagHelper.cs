@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
 
 namespace Nonsense.MvcApp.Infrastructure {
+
     [HtmlTargetElement("a", Attributes = "th-is-active-route")]
     public class ActiveRouteTagHelper : TagHelper {
+
         [HtmlAttributeName("asp-controller")]
         public string Controller { get; set; }
 

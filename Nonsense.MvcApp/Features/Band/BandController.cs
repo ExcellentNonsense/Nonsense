@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using Nonsense.Application.RandomImages.Interactors;
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Nonsense.MvcApp.Features.Band {
+
     public class BandController : Controller {
+
         private readonly IGetFlickrImagesInteractor _getFlickrImagesInteractor;
         private readonly GetFlickrImagesPresenter _getFlickrImagesPresenter;
 

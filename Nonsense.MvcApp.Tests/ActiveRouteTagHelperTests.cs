@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace Nonsense.MvcApp.Tests {
+
     public class ActiveRouteTagHelperTests {
+
         [Fact]
         public void ProcessTag_ActiveHeaderLink_AddClass() {
             // Arrange
@@ -85,6 +87,7 @@ namespace Nonsense.MvcApp.Tests {
         }
 
         private class TagHelperEnvironment {
+
             public TagHelperContext Context { get; set; }
             public TagHelperOutput Output { get; set; }
             public ViewContext ViewContext { get; set; }

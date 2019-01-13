@@ -5,10 +5,11 @@ using Nonsense.Application.RandomImages.Responses;
 using Nonsense.Common.Utilities;
 using Nonsense.MvcApp.Infrastructure;
 using System;
-using System.Collections.Generic;
 
 namespace Nonsense.MvcApp.Features.Band {
+
     public class GetFlickrImagesPresenter : IOutputPort<GetFlickrImagesResponse> {
+
         public JsonResult FinalData { get; private set; }
 
         public void Handle(GetFlickrImagesResponse response) {

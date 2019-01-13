@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nonsense.Persistence", "Nonsense.Persistence\Nonsense.Persistence.csproj", "{4D98E9CC-FAD1-4447-8CA3-BC99F9946AD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nonsense.Common", "Nonsense.Common\Nonsense.Common.csproj", "{D9C3AD03-D684-4934-9420-6D8E2A8061B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nonsense.Common", "Nonsense.Common\Nonsense.Common.csproj", "{D9C3AD03-D684-4934-9420-6D8E2A8061B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,16 +1,12 @@
 ﻿using Newtonsoft.Json.Linq;
-using System;
 
 namespace Nonsense.Common.Utilities {
-    public static class Json {
-        public static JObject TransformJson(JObject original, JObject template) {
-            if (original == null) {
-                throw new ArgumentNullException(nameof(original));
-            }
 
-            if (template == null) {
-                throw new ArgumentNullException(nameof(template));
-            }
+    public static class Json {
+
+        public static JObject TransformJson(JObject original, JObject template) {
+            Guard.NotNull(original, nameof(original));
+            Guard.NotNull(template, nameof(template));
 
             var result = new JObject();
 

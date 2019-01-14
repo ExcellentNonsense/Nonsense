@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Nonsense.Application.RandomImages.Interactors;
-using System;
+using Nonsense.Common.Utilities;
 using System.Threading.Tasks;
 
 namespace Nonsense.MvcApp.Features.Band {
@@ -11,8 +11,11 @@ namespace Nonsense.MvcApp.Features.Band {
         private readonly GetFlickrImagesPresenter _getFlickrImagesPresenter;
 
         public BandController(IGetFlickrImagesInteractor getFlickrImagesInteractor, GetFlickrImagesPresenter presenter) {
-            _getFlickrImagesInteractor = getFlickrImagesInteractor ?? throw new ArgumentNullException(nameof(getFlickrImagesInteractor));
-            _getFlickrImagesPresenter = presenter ?? throw new ArgumentNullException(nameof(presenter));
+            Guard.NotNull(getFlickrImagesInteractor, nameof(getFlickrImagesInteractor));
+            Guard.NotNull(presenter, nameof(presenter));
+
+            _getFlickrImagesInteractor = getFlickrImagesInteractor;
+            _getFlickrImagesPresenter = presenter;
         }
 
         public IActionResult Index() {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Razor;
-using System;
+using Nonsense.Common.Utilities;
 using System.Collections.Generic;
 
 namespace Nonsense.MvcApp.Infrastructure {
@@ -8,9 +8,8 @@ namespace Nonsense.MvcApp.Infrastructure {
     public class FeatureViewLocationExpander : IViewLocationExpander {
 
         public IEnumerable<string> ExpandViewLocations(ViewLocationExpanderContext context, IEnumerable<string> viewLocations) {
-            if (context == null) throw new ArgumentNullException(nameof(context));
-
-            if (viewLocations == null) throw new ArgumentNullException(nameof(viewLocations));
+            Guard.NotNull(context, nameof(context));
+            Guard.NotNull(viewLocations, nameof(viewLocations));
 
             var controllerDescriptor = context.ActionContext.ActionDescriptor as ControllerActionDescriptor;
             var featureName = controllerDescriptor?.Properties["feature"] as string;
@@ -21,6 +20,8 @@ namespace Nonsense.MvcApp.Infrastructure {
         }
 
         public void PopulateValues(ViewLocationExpanderContext context) {
+            Guard.NotNull(context, nameof(context));
+
             context.Values["action_displayname"] = context.ActionContext.ActionDescriptor.DisplayName;
         }
     }

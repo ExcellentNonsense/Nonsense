@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Nonsense.Application.Gateways.WebServices;
+using Nonsense.Common.Utilities;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -15,12 +16,10 @@ namespace Nonsense.Infrastructure.WebServices {
         private readonly int _perPage_ApiLimit = 500;
 
         public FlickrService(HttpClient client, IConfiguration config) {
-            _client = client ?? throw new ArgumentNullException(nameof(client));
+            Guard.NotNull(client, nameof(client));
+            Guard.NotNull(config, nameof(config));
 
-            if (config == null) {
-                throw new ArgumentNullException(nameof(config));
-            }
-
+            _client = client;
             _client.BaseAddress = new Uri(config["FlickrService:Uri"]);
             _client.DefaultRequestHeaders.Add("Accept", "application/json");
             _client.DefaultRequestHeaders.Add("User-Agent", "ExcellentNonsense-Nonsense");

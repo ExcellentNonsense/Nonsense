@@ -13,9 +13,7 @@ namespace Nonsense.MvcApp.Features.Band {
         public JsonResult FinalData { get; private set; }
 
         public void Handle(GetFlickrImagesResponse response) {
-            if (response == null) {
-                throw new ArgumentNullException(nameof(response));
-            }
+            Guard.NotNull(response, nameof(response));
 
             var result = new JObject();
 

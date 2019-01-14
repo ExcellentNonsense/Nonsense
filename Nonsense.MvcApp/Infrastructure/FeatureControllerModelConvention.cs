@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ApplicationModels;
-using System;
+using Nonsense.Common.Utilities;
 using System.Linq;
 
 namespace Nonsense.MvcApp.Infrastructure {
@@ -7,7 +7,7 @@ namespace Nonsense.MvcApp.Infrastructure {
     class FeatureControllerModelConvention : IControllerModelConvention {
 
         public void Apply(ControllerModel model) {
-            if (model == null) throw new ArgumentNullException(nameof(model));
+            Guard.NotNull(model, nameof(model));
 
             var featureName = GetFeatureName(model);
             model.Properties.Add("feature", featureName);

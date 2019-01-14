@@ -1,13 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Nonsense.Common.Utilities;
 using Nonsense.MvcApp.Infrastructure;
-using System;
 
 namespace Nonsense.MvcApp.Extensions {
 
     public static class ServiceCollectionExtensions {
 
         public static IMvcBuilder AddFeatureFolders(this IMvcBuilder services) {
-            if (services == null) throw new ArgumentNullException(nameof(services));
+            Guard.NotNull(services, nameof(services));
 
             services.AddMvcOptions(o => o.Conventions.Add(new FeatureControllerModelConvention()))
                 .AddRazorOptions(o => {

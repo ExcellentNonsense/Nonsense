@@ -2,16 +2,23 @@
 
 <html>
 <head>
+  <title>@ViewBag.Title - Ерунда</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <partial name="_Favicons" />
-  <title>@ViewBag.Title - Ерунда</title>
-  <link href="~/lib/normalize/normalize.min.css" />
   <environment include="Development">
-    <link asp-href-include="~/css/**/*.css" asp-href-exclude="~/css/site.css" asp-append-version="true" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/normalize/normalize.min.css" />
+    <link rel="stylesheet"
+          asp-href-include="~/css/**/*.css"
+          asp-href-exclude="~/css/site.css"
+          asp-append-version="true" />
   </environment>
   <environment exclude="Development">
-    <link href="~/css/site.css" asp-append-version="true" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+          integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU="
+          crossorigin="anonymous" />
+    <link rel="stylesheet" href="~/css/site.css"
+          asp-append-version="true" />
   </environment>
 </head>
 <body>
@@ -80,10 +87,13 @@
   </div>
   @RenderSection("ServiceContent", false)
   <environment include="Development">
-    <script asp-src-include="~/js/**/*.js" asp-src-exclude="~/js/site.js"></script>
+    <script asp-src-include="~/js/**/*.js"
+            asp-src-exclude="~/js/site.js"
+            asp-append-version="true"></script>
   </environment>
   <environment exclude="Development">
-    <script src="~/js/site.js"></script>
+    <script src="~/js/site.js"
+            asp-append-version="true"></script>
   </environment>
 </body>
 </html>

@@ -53,7 +53,7 @@ namespace Nonsense.MvcApp.Features.Band {
             }
             else {
                 result.Add(new JProperty(JsonLiterals.propStatus, JsonLiterals.statusFail));
-                result.Add(new JProperty(JsonLiterals.propErrors, response.Errors));
+                result.Add(new JProperty(JsonLiterals.propErrors, response.ErrorsList));
             }
 
             FinalData = new JsonResult(result);

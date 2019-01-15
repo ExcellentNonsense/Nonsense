@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+  <title>@ViewBag.Title - Ерунда</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <partial name="_Favicons" />
+  <environment include="Development">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+  </environment>
+  <environment exclude="Development">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+          crossorigin="anonymous"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only"
+          asp-fallback-test-property="position"
+          asp-fallback-test-value="absolute" />
+  </environment>
+</head>
+<body class="p-1">
+  <header>
+    <span class="h4 text-primary">Ерунда</span><sup class="text-primary">&copy;</sup>
+    <h2>Администрирование</h2>
+    <nav class="mt-4 mb-4 border-top">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" asp-action="Index" asp-controller="Users">Пользователи</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    @RenderBody()
+  </main>
+</body>
+</html>

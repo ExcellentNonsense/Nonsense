@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Nonsense.Infrastructure.WebServices {
 
-    public class FlickrService : IFlickrService {
+    public sealed class FlickrService : IFlickrService {
 
         private readonly HttpClient _client;
         private readonly string _apiKey;
@@ -32,7 +32,7 @@ namespace Nonsense.Infrastructure.WebServices {
 
             if (0 >= photosCount || photosCount > _perPage_ApiLimit) {
                 result.Success = false;
-                result.AddMessage($"The number of images requested is out of range - 0-{_perPage_ApiLimit}.");
+                result.AddError($"The number of images requested is out of range - 0-{_perPage_ApiLimit}.");
             }
 
             if (result.Success) {
@@ -47,7 +47,7 @@ namespace Nonsense.Infrastructure.WebServices {
                 }
                 catch (HttpRequestException) {
                     result.Success = false;
-                    result.AddMessage("The request failed.");
+                    result.AddError("The request failed.");
                 }
             }
 

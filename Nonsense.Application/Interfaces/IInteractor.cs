@@ -6,4 +6,9 @@ namespace Nonsense.Application.Interfaces {
 
         Task<bool> Execute(IOutputPort<TInteractorResponse> outputPort);
     }
+
+    public interface IInteractor<TInteractorRequest, TInteractorResponse> : IInputPort<TInteractorRequest> {
+
+        Task<bool> Execute(TInteractorRequest request, IOutputPort<TInteractorResponse> outputPort);
+    }
 }

@@ -20,9 +20,12 @@
   </style>
 </head>
 <body>
-  <a asp-action="Index" asp-controller="Home">Home -> Index</a><br />
-  <a asp-action="Index" asp-controller="Profile">Profile -> Index</a><br />
-  <a asp-action="Index" asp-controller="Feedback">Feedback -> Index</a><br />
-  <a asp-action="Index" asp-controller="Band">Band -> Index</a><br />
+  <p>Main part</p>
+  <a asp-action="Index" asp-controller="Home">Home</a><br />
+  <a asp-action="Index" asp-controller="Profile">Profile</a><br />
+  <a asp-action="Index" asp-controller="Feedback">Feedback</a><br />
+  <a asp-action="Index" asp-controller="Band">Band</a><br />
+  <p>Admin area</p>
+  <a asp-action="Index" asp-controller="Users" asp-area="Admin">Users</a>
 </body>
 </html>

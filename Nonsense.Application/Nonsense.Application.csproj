@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Nonsense.Common\Nonsense.Common.csproj" />
+    <ProjectReference Include="..\Nonsense.Domain\Nonsense.Domain.csproj" />
   </ItemGroup>
 
 </Project>

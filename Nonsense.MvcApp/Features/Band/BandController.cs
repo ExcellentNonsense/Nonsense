@@ -18,6 +18,7 @@ namespace Nonsense.MvcApp.Features.Band {
             _getFlickrImagesPresenter = presenter;
         }
 
+        [HttpGet]
         public IActionResult Index() {
             var result = RedirectToAction(nameof(FlickrBand));
 
@@ -28,10 +29,13 @@ namespace Nonsense.MvcApp.Features.Band {
             return result;
         }
 
+        [HttpGet]
         public IActionResult FlickrBand() => View();
 
+        [HttpGet]
         public IActionResult MyBand() => View();
 
+        [HttpGet]
         public async Task<JsonResult> GetFlickrImages() {
             await _getFlickrImagesInteractor.Execute(_getFlickrImagesPresenter);
             return _getFlickrImagesPresenter.FinalData;

@@ -2,12 +2,11 @@
 using Nonsense.Application.Interfaces;
 using Nonsense.Application.RandomImages.Responses;
 using Nonsense.Common.Utilities;
-using System;
 using System.Threading.Tasks;
 
 namespace Nonsense.Application.RandomImages.Interactors {
 
-    public class GetFlickrImagesInteractor : IGetFlickrImagesInteractor {
+    public sealed class GetFlickrImagesInteractor : IGetFlickrImagesInteractor {
 
         private readonly IFlickrService _flickrService;
 
@@ -23,7 +22,7 @@ namespace Nonsense.Application.RandomImages.Interactors {
             var response = await _flickrService.GetRandomPhotos(tags: "nonsense", photosCount: 10);
 
             outputPort.Handle(
-                new GetFlickrImagesResponse(response.Success, response.Messages, response.Data));
+                new GetFlickrImagesResponse(response.Success, response.ErrorsList, response.Data));
 
             return response.Success;
         }

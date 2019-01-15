@@ -1,16 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Nonsense.Common {
 
     public class OperationResult {
 
         public bool Success { get; set; } = true;
-        public List<string> Messages { get; } = new List<string>();
+        public IList<string> ErrorsList { get; } = new List<string>();
 
-        public void AddMessage(string message) {
-            if (!String.IsNullOrWhiteSpace(message)) {
-                Messages.Add(message);
+        public void AddError(string error) {
+            if (!String.IsNullOrWhiteSpace(error)) {
+                ErrorsList.Add(error);
+            }
+        }
+
+        public OperationResult() {
+
+        }
+
+        public OperationResult(bool success, IEnumerable<string> errors) {
+            Success = success;
+
+            foreach (var error in errors ?? Enumerable.Empty<string>()) {
+                AddError(error);
             }
         }
     }

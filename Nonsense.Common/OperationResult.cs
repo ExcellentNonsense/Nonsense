@@ -15,6 +15,12 @@ namespace Nonsense.Common {
             }
         }
 
+        public void AddError(IEnumerable<string> errors) {
+            foreach (var error in errors ?? Enumerable.Empty<string>()) {
+                AddError(error);
+            }
+        }
+
         public OperationResult() {
 
         }
@@ -22,8 +28,8 @@ namespace Nonsense.Common {
         public OperationResult(bool success, IEnumerable<string> errors) {
             Success = success;
 
-            foreach (var error in errors ?? Enumerable.Empty<string>()) {
-                AddError(error);
+            if (errors != null) {
+                AddError(errors);
             }
         }
     }

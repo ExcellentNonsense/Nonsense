@@ -1,12 +1,11 @@
 ﻿
 
-namespace Nonsense.Application.Users.Dto {
+namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
 
-    public sealed class User {
+    public class DisplayViewModel {
 
         public string Id { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
     }
 }

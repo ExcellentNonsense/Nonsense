@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Nonsense.Application.Users;
+using Nonsense.Application.Users.Dto;
 using Nonsense.Application.Users.Requests;
 using Nonsense.Common.Utilities;
 using System;
@@ -22,6 +23,31 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
         public async Task<IActionResult> Index() {
             var users = (await _userService.GetAllUsers()).Users;
             return View(users);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Display(string id) {
+            Guard.NotNullOrEmpty(id, nameof(id));
+
+            IActionResult result;
+
+            var response = await _userService.GetUserById(id);
+
+            if (response.Success) {
+                var model = new DisplayViewModel {
+                    Id = response.User.Id,
+                    UserName = response.User.UserName,
+                    Email = response.User.Email
+                };
+                result = View(model);
+            }
+            else {
+                AddErrors(response.ErrorsList);
+                var users = (await _userService.GetAllUsers()).Users;
+                result = View("Index", users);
+            }
+
+            return result;
         }
 
         [HttpGet]
@@ -66,6 +92,50 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
                     Email = response.User.Email
                 };
                 result = View(model);
+            }
+            else {
+                AddErrors(response.ErrorsList);
+                var users = (await _userService.GetAllUsers()).Users;
+                result = View("Index", users);
+            }
+
+            return result;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditViewModel model) {
+            Guard.NotNull(model, nameof(model));
+
+            IActionResult result;
+
+            if (ModelState.IsValid) {
+                var response = await _userService.EditUser(new EditUserRequest(model.Id, model.UserName, model.Email, model.Password));
+
+                if (response.Success) {
+                    result = RedirectToAction("Index");
+                }
+                else {
+                    AddErrors(response.ErrorsList);
+                    result = View(model);
+                }
+            }
+            else {
+                result = View(model);
+            }
+
+            return result;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id) {
+            Guard.NotNullOrEmpty(id, nameof(id));
+
+            IActionResult result;
+
+            var response = await _userService.DeleteUser(id);
+
+            if (response.Success) {
+                result = RedirectToAction("Index");
             }
             else {
                 AddErrors(response.ErrorsList);

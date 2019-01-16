@@ -5,7 +5,9 @@
 }
 
 <div class="p-1 bg-primary text-white"><h4>Редактировать пользователя</h4></div>
+
 <div asp-validation-summary="All" class="text-danger"></div>
+
 <form asp-action="Edit" method="post">
   <input type="hidden" asp-for="Id" value="@Model.Id" />
   <div class="form-group">

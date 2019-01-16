@@ -1,4 +1,5 @@
-﻿using Nonsense.Application.Users.Requests;
+﻿using Nonsense.Application.Users.Dto;
+using Nonsense.Application.Users.Requests;
 using Nonsense.Application.Users.Responses;
 using System.Threading.Tasks;
 
@@ -9,5 +10,7 @@ namespace Nonsense.Application.Users {
         Task<CreateUserResponse> CreateUser(CreateUserRequest request);
         Task<GetAllUsersResponse> GetAllUsers();
         Task<GetUserByIdResponse> GetUserById(string id);
+        Task<EditUserResponse> EditUser(EditUserRequest request);
+        Task<DeleteUserResponse> DeleteUser(string id);
     }
 }

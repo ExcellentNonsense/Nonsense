@@ -1,5 +1,5 @@
-﻿using Nonsense.Common;
-using Nonsense.Domain.Entities;
+﻿using Nonsense.Application.Users.Dto;
+using Nonsense.Common;
 using System.Collections.Generic;
 
 namespace Nonsense.Application.Gateways.Repositories {

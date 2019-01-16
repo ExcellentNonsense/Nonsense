@@ -1,5 +1,4 @@
-﻿using Nonsense.Application.Interfaces;
-using Nonsense.Common;
+﻿using Nonsense.Common;
 using System.Collections.Generic;
 
 namespace Nonsense.Application.Users.Responses {

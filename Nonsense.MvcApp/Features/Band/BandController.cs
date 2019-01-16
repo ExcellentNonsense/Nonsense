@@ -1,21 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Nonsense.Application.RandomImages.Interactors;
+using Newtonsoft.Json.Linq;
+using Nonsense.Application.RandomImages;
 using Nonsense.Common.Utilities;
+using Nonsense.MvcApp.Infrastructure;
+using System;
 using System.Threading.Tasks;
 
 namespace Nonsense.MvcApp.Features.Band {
 
     public class BandController : Controller {
 
-        private readonly IGetFlickrImagesInteractor _getFlickrImagesInteractor;
-        private readonly GetFlickrImagesPresenter _getFlickrImagesPresenter;
+        private readonly IRandomImagesService _randomImagesService;
 
-        public BandController(IGetFlickrImagesInteractor getFlickrImagesInteractor, GetFlickrImagesPresenter presenter) {
-            Guard.NotNull(getFlickrImagesInteractor, nameof(getFlickrImagesInteractor));
-            Guard.NotNull(presenter, nameof(presenter));
+        public BandController(IRandomImagesService randomImagesService) {
+            Guard.NotNull(randomImagesService, nameof(randomImagesService));
 
-            _getFlickrImagesInteractor = getFlickrImagesInteractor;
-            _getFlickrImagesPresenter = presenter;
+            _randomImagesService = randomImagesService;
         }
 
         [HttpGet]
@@ -37,8 +37,50 @@ namespace Nonsense.MvcApp.Features.Band {
 
         [HttpGet]
         public async Task<JsonResult> GetFlickrImages() {
-            await _getFlickrImagesInteractor.Execute(_getFlickrImagesPresenter);
-            return _getFlickrImagesPresenter.FinalData;
+            var response = await _randomImagesService.GetFlickrImages();
+
+            var result = new JObject();
+
+            if (response.Success) {
+                var flickrJson = JObject.Parse(response.Data);
+
+                var flickrResponseSuccess = flickrJson.SelectToken("$.stat").ToString()
+                    .Equals("ok", StringComparison.OrdinalIgnoreCase);
+
+                if (flickrResponseSuccess) {
+                    var receivedImagesInfo = flickrJson.SelectTokens("$.photos.photo[*]");
+                    var truncatedImagesInfo = new JArray();
+
+                    JObject originalInfo;
+                    JObject transformedInfo;
+
+                    var template = JObject.Parse(@"{
+                        ""id"": """",
+                        ""owner"": """",
+                        ""title"": """",
+                        ""url_z"": """"
+                    }");
+
+                    foreach (var imagesInfo in receivedImagesInfo) {
+                        originalInfo = JObject.Parse(imagesInfo.ToString());
+                        transformedInfo = Common.Utilities.Json.TransformJson(originalInfo, template);
+                        truncatedImagesInfo.Add(transformedInfo);
+                    }
+
+                    result.Add(new JProperty(JsonLiterals.propImages, truncatedImagesInfo));
+                    result.Add(new JProperty(JsonLiterals.propStatus, JsonLiterals.statusOk));
+                }
+                else {
+                    result.Add(new JProperty(JsonLiterals.propStatus, JsonLiterals.statusFail));
+                    result.Add(new JProperty(JsonLiterals.propErrors, flickrJson.SelectToken("$.message")));
+                }
+            }
+            else {
+                result.Add(new JProperty(JsonLiterals.propStatus, JsonLiterals.statusFail));
+                result.Add(new JProperty(JsonLiterals.propErrors, response.ErrorsList));
+            }
+
+            return new JsonResult(result);
         }
     }
 }

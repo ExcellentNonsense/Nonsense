@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Nonsense.Application.Gateways.Repositories;
+using Nonsense.Application.Users.Dto;
 using Nonsense.Common.Utilities;
-using Nonsense.Domain.Entities;
 using Nonsense.Infrastructure.Identity;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 

@@ -1,6 +1,6 @@
 ﻿
 
-namespace Nonsense.Domain.Entities {
+namespace Nonsense.Application.Users.Dto {
 
     public sealed class User {
 

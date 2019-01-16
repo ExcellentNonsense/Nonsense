@@ -44,7 +44,6 @@ namespace Nonsense.MvcApp {
 
         // Register services with Autofac container.
         public void ConfigureContainer(ContainerBuilder builder) {
-            builder.RegisterModule(new MvcAppModule());
             builder.RegisterModule(new ApplicationModule());
             builder.RegisterModule(new InfrastructureModule());
         }

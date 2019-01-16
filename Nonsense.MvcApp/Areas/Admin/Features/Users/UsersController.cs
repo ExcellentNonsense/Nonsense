@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Nonsense.Application.Users.Interactors;
+using Nonsense.Application.Users;
 using Nonsense.Application.Users.Requests;
 using Nonsense.Common.Utilities;
-using Nonsense.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,39 +10,17 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
     [Area("Admin")]
     public class UsersController : Controller {
 
-        private readonly ICreateUserInteractor _createUserInteractor;
-        private readonly CreateUserPresenter _createUserPresenter;
-        private readonly IGetAllUsersInteractor _getAllUsersInteractor;
-        private readonly GetAllUsersPresenter _getAllUsersPresenter;
-        private readonly IGetUserByIdInteractor _getUserByIdInteractor;
-        private readonly GetUserByIdPresenter _getUserByIdPresenter;
+        private readonly IUserService _userService;
 
-        public UsersController(
-            ICreateUserInteractor createUserInteractor, 
-            CreateUserPresenter createUserPresenter,
-            IGetAllUsersInteractor getAllUsersInteractor,
-            GetAllUsersPresenter getAllUsersPresenter,
-            IGetUserByIdInteractor getUserByIdInteractor,
-            GetUserByIdPresenter getUserByIdPresenter) {
+        public UsersController(IUserService userService) {
+            Guard.NotNull(userService, nameof(userService));
 
-            Guard.NotNull(createUserInteractor, nameof(createUserInteractor));
-            Guard.NotNull(createUserPresenter, nameof(createUserPresenter));
-            Guard.NotNull(getAllUsersInteractor, nameof(getAllUsersInteractor));
-            Guard.NotNull(getAllUsersPresenter, nameof(getAllUsersPresenter));
-            Guard.NotNull(getUserByIdInteractor, nameof(getUserByIdInteractor));
-            Guard.NotNull(getUserByIdPresenter, nameof(getUserByIdPresenter));
-
-            _createUserInteractor = createUserInteractor;
-            _createUserPresenter = createUserPresenter;
-            _getAllUsersInteractor = getAllUsersInteractor;
-            _getAllUsersPresenter = getAllUsersPresenter;
-            _getUserByIdInteractor = getUserByIdInteractor;
-            _getUserByIdPresenter = getUserByIdPresenter;
+            _userService = userService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index() {
-            var users = await GetAllUsers();
+            var users = (await _userService.GetAllUsers()).Users;
             return View(users);
         }
 
@@ -57,15 +34,13 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
             IActionResult result;
 
             if (ModelState.IsValid) {
-                await _createUserInteractor.Execute(
-                    new CreateUserRequest(model.UserName, model.Email, model.Password),
-                    _createUserPresenter);
+                var response = await _userService.CreateUser(new CreateUserRequest(model.UserName, model.Email, model.Password));
 
-                if (_createUserPresenter.Success) {
+                if (response.Success) {
                     result = RedirectToAction("Index");
                 }
                 else {
-                    AddErrors(_createUserPresenter.Errors);
+                    AddErrors(response.ErrorsList);
                     result = View(model);
                 }
             }
@@ -82,32 +57,23 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
 
             IActionResult result;
 
-            var user = await GetUserById(id);
+            var response = await _userService.GetUserById(id);
 
-            if (_getUserByIdPresenter.Success) {
+            if (response.Success) {
                 var model = new EditViewModel {
-                    Id = user.Id,
-                    UserName = user.UserName,
-                    Email = user.Email
+                    Id = response.User.Id,
+                    UserName = response.User.UserName,
+                    Email = response.User.Email
                 };
                 result = View(model);
             }
             else {
-                AddErrors(_getUserByIdPresenter.Errors);
-                result = View("Index", await GetAllUsers());
+                AddErrors(response.ErrorsList);
+                var users = (await _userService.GetAllUsers()).Users;
+                result = View("Index", users);
             }
 
             return result;
-        }
-
-        private async Task<User> GetUserById(string id) {
-            await _getUserByIdInteractor.Execute(new GetUserByIdRequest(id), _getUserByIdPresenter);
-            return _getUserByIdPresenter.User;
-        }
-
-        private async Task<IEnumerable<User>> GetAllUsers() {
-            await _getAllUsersInteractor.Execute(_getAllUsersPresenter);
-            return _getAllUsersPresenter.Users;
         }
 
         private void AddErrors(IEnumerable<string> errors) {

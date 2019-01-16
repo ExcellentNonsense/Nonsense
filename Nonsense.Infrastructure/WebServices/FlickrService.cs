@@ -27,20 +27,20 @@ namespace Nonsense.Infrastructure.WebServices {
             _apiKey = config["FlickrService:ApiKey"];
         }
 
-        public async Task<FlickrServiceResponse> GetRandomPhotos(string tags, int photosCount) {
+        public async Task<FlickrServiceResponse> GetRandomImages(string tags, int imagesCount) {
             var result = new FlickrServiceResponse();
 
-            if (0 >= photosCount || photosCount > _perPage_ApiLimit) {
+            if (0 >= imagesCount || imagesCount > _perPage_ApiLimit) {
                 result.Success = false;
                 result.AddError($"The number of images requested is out of range - 0-{_perPage_ApiLimit}.");
             }
 
             if (result.Success) {
                 Random randomNumbers = new Random();
-                int pageNumber = randomNumbers.Next(1, _perSearch_ApiLimit / photosCount);
+                int pageNumber = randomNumbers.Next(1, _perSearch_ApiLimit / imagesCount);
 
                 var url = new Uri("?method=flickr.photos.search&media=photos&privacy_filter=1&safe_search=1&extras=url_z&format=json&nojsoncallback=1&" +
-                    $"api_key={_apiKey}&tags={tags}&per_page={photosCount}&page={pageNumber}", UriKind.Relative);
+                    $"api_key={_apiKey}&tags={tags}&per_page={imagesCount}&page={pageNumber}", UriKind.Relative);
 
                 try {
                     result.Data = await _client.GetStringAsync(url);

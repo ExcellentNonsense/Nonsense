@@ -1,6 +1,6 @@
 ﻿using Autofac;
-using Nonsense.Application.RandomImages.Interactors;
-using Nonsense.Application.Users.Interactors;
+using Nonsense.Application.RandomImages;
+using Nonsense.Application.Users;
 
 namespace Nonsense.Application {
 
@@ -10,23 +10,13 @@ namespace Nonsense.Application {
             base.Load(builder);
 
             builder
-                .RegisterType<GetFlickrImagesInteractor>()
-                .As<IGetFlickrImagesInteractor>()
+                .RegisterType<UserService>()
+                .As<IUserService>()
                 .InstancePerLifetimeScope();
 
             builder
-                .RegisterType<CreateUserInteractor>()
-                .As<ICreateUserInteractor>()
-                .InstancePerLifetimeScope();
-
-            builder
-                .RegisterType<GetAllUsersInteractor>()
-                .As<IGetAllUsersInteractor>()
-                .InstancePerLifetimeScope();
-
-            builder
-                .RegisterType<GetUserByIdInteractor>()
-                .As<IGetUserByIdInteractor>()
+                .RegisterType<RandomImagesService>()
+                .As<IRandomImagesService>()
                 .InstancePerLifetimeScope();
         }
     }

@@ -4,6 +4,6 @@ namespace Nonsense.Application.RandomImages {
 
     public interface IRandomImagesService {
 
-        Task<BoundaryResponse<string>> GetFlickrImages();
+        Task<BoundaryResponse<string>> GetFlickrImages(int imagesCount);
     }
 }

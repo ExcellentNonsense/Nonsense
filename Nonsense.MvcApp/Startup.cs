@@ -66,14 +66,14 @@ namespace Nonsense.MvcApp {
 
                 routes.MapRoute(
                     name: null,
-                    template: "",
-                    defaults: new { controller = "Dev", action = "SiteMap" }
+                    template: "{controller}/{action=Index}"
                 );
 
+                // For initial development.
                 routes.MapRoute(
                     name: null,
-                    template: "{controller}/{action}",
-                    defaults: new { action = "Index" });
+                    template: "{controller=Dev}/{action=SiteMap}"
+                );
             });
         }
     }

@@ -1,7 +1,8 @@
 ﻿using Nonsense.Application.Gateways.Repositories;
-using Nonsense.Application.Users.Requests;
-using Nonsense.Application.Users.Responses;
+using Nonsense.Application.Users.Dto;
+using Nonsense.Common;
 using Nonsense.Common.Utilities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Nonsense.Application.Users {
@@ -16,42 +17,42 @@ namespace Nonsense.Application.Users {
             _userRepository = userRepository;
         }
 
-        public async Task<Responses.CreateUserResponse> CreateUser(CreateUserRequest request) {
-            Guard.NotNull(request, nameof(request));
+        public async Task<BoundaryResponse<string>> CreateUser(User user) {
+            Guard.NotNull(user, nameof(user));
 
-            var response = await _userRepository.Create(request.UserName, request.Email, request.Password);
+            var response = await _userRepository.Create(user.UserName, user.Email, user.Password);
 
-            return new Responses.CreateUserResponse(response.Success, response.ErrorsList, response.Id);
+            return new BoundaryResponse<string>(response.Success, response.ErrorsList, response.Data);
         }
 
-        public async Task<Responses.GetAllUsersResponse> GetAllUsers() {
-            var response = await _userRepository.GetAll();
-
-            return new Responses.GetAllUsersResponse(response.Success, response.ErrorsList, response.Users);
-        }
-
-        public async Task<Responses.GetUserByIdResponse> GetUserById(string id) {
+        public async Task<BoundaryResponse<User>> GetUserById(string id) {
             Guard.NotNullOrEmpty(id, nameof(id));
 
             var response = await _userRepository.GetById(id);
 
-            return new Responses.GetUserByIdResponse(response.Success, response.ErrorsList, response.User);
+            return new BoundaryResponse<User>(response.Success, response.ErrorsList, response.Data);
         }
 
-        public async Task<EditUserResponse> EditUser(EditUserRequest request) {
-            Guard.NotNull(request, nameof(request));
+        public async Task<BoundaryResponse<IEnumerable<User>>> GetAllUsers() {
+            var response = await _userRepository.GetAll();
 
-            var response = await _userRepository.Update(request.Id, request.UserName, request.Email, request.Password);
-
-            return new EditUserResponse(response.Success, response.ErrorsList, response.Id);
+            return new BoundaryResponse<IEnumerable<User>>(response.Success, response.ErrorsList, response.Data);
         }
 
-        public async Task<Responses.DeleteUserResponse> DeleteUser(string id) {
+        public async Task<OperationResult> EditUser(User user) {
+            Guard.NotNull(user, nameof(user));
+
+            var response = await _userRepository.Update(user.Id, user.UserName, user.Email, user.Password);
+
+            return new OperationResult(response.Success, response.ErrorsList);
+        }
+
+        public async Task<OperationResult> DeleteUser(string id) {
             Guard.NotNull(id, nameof(id));
 
             var response = await _userRepository.Delete(id);
 
-            return new Responses.DeleteUserResponse(response.Success, response.ErrorsList, response.Id);
+            return new OperationResult(response.Success, response.ErrorsList);
         }
     }
 }

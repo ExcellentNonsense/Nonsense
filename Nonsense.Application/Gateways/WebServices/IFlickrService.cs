@@ -4,6 +4,6 @@ namespace Nonsense.Application.Gateways.WebServices {
 
     public interface IFlickrService {
 
-        Task<FlickrServiceResponse> GetRandomImages(string tags, int imagesCount);
+        Task<BoundaryResponse<string>> GetRandomImages(string tags, int imagesCount);
     }
 }

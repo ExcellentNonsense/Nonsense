@@ -1,16 +1,16 @@
 ﻿using Nonsense.Application.Users.Dto;
-using Nonsense.Application.Users.Requests;
-using Nonsense.Application.Users.Responses;
+using Nonsense.Common;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Nonsense.Application.Users {
 
     public interface IUserService {
 
-        Task<CreateUserResponse> CreateUser(CreateUserRequest request);
-        Task<GetAllUsersResponse> GetAllUsers();
-        Task<GetUserByIdResponse> GetUserById(string id);
-        Task<EditUserResponse> EditUser(EditUserRequest request);
-        Task<DeleteUserResponse> DeleteUser(string id);
+        Task<BoundaryResponse<string>> CreateUser(User user);
+        Task<BoundaryResponse<User>> GetUserById(string id);
+        Task<BoundaryResponse<IEnumerable<User>>> GetAllUsers();
+        Task<OperationResult> EditUser(User user);
+        Task<OperationResult> DeleteUser(string id);
     }
 }

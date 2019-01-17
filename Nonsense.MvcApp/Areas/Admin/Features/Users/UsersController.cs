@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Nonsense.Application.Users;
 using Nonsense.Application.Users.Dto;
-using Nonsense.Application.Users.Requests;
 using Nonsense.Common.Utilities;
 using System;
 using System.Collections.Generic;
@@ -21,7 +20,7 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
 
         [HttpGet]
         public async Task<IActionResult> Index() {
-            var users = (await _userService.GetAllUsers()).Users;
+            var users = (await _userService.GetAllUsers()).Data;
             return View(users);
         }
 
@@ -34,16 +33,19 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
             var response = await _userService.GetUserById(id);
 
             if (response.Success) {
+                var user = response.Data;
+
                 var model = new DisplayViewModel {
-                    Id = response.User.Id,
-                    UserName = response.User.UserName,
-                    Email = response.User.Email
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Email = user.Email
                 };
+
                 result = View(model);
             }
             else {
                 AddErrors(response.ErrorsList);
-                var users = (await _userService.GetAllUsers()).Users;
+                var users = (await _userService.GetAllUsers()).Data;
                 result = View("Index", users);
             }
 
@@ -60,7 +62,11 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
             IActionResult result;
 
             if (ModelState.IsValid) {
-                var response = await _userService.CreateUser(new CreateUserRequest(model.UserName, model.Email, model.Password));
+                var response = await _userService.CreateUser(new User {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    Password = model.Password
+                });
 
                 if (response.Success) {
                     result = RedirectToAction("Index");
@@ -86,16 +92,19 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
             var response = await _userService.GetUserById(id);
 
             if (response.Success) {
+                var user = response.Data;
+
                 var model = new EditViewModel {
-                    Id = response.User.Id,
-                    UserName = response.User.UserName,
-                    Email = response.User.Email
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Email = user.Email
                 };
+
                 result = View(model);
             }
             else {
                 AddErrors(response.ErrorsList);
-                var users = (await _userService.GetAllUsers()).Users;
+                var users = (await _userService.GetAllUsers()).Data;
                 result = View("Index", users);
             }
 
@@ -109,7 +118,12 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
             IActionResult result;
 
             if (ModelState.IsValid) {
-                var response = await _userService.EditUser(new EditUserRequest(model.Id, model.UserName, model.Email, model.Password));
+                var response = await _userService.EditUser(new User {
+                    Id = model.Id,
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    Password = model.Password
+                });
 
                 if (response.Success) {
                     result = RedirectToAction("Index");
@@ -139,7 +153,7 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
             }
             else {
                 AddErrors(response.ErrorsList);
-                var users = (await _userService.GetAllUsers()).Users;
+                var users = (await _userService.GetAllUsers()).Data;
                 result = View("Index", users);
             }
 

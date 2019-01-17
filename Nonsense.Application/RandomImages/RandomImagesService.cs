@@ -1,5 +1,4 @@
 ﻿using Nonsense.Application.Gateways.WebServices;
-using Nonsense.Application.RandomImages.Responses;
 using Nonsense.Common.Utilities;
 using System.Threading.Tasks;
 
@@ -15,10 +14,10 @@ namespace Nonsense.Application.RandomImages {
             _flickrService = flickrService;
         }
 
-        public async Task<GetFlickrImagesResponse> GetFlickrImages() {
+        public async Task<BoundaryResponse<string>> GetFlickrImages() {
             var response = await _flickrService.GetRandomImages(tags: "nonsense", imagesCount: 10);
 
-            return new GetFlickrImagesResponse(response.Success, response.ErrorsList, response.Data);
+            return new BoundaryResponse<string>(response.Success, response.ErrorsList, response.Data);
         }
     }
 }

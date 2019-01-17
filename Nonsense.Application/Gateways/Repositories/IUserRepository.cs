@@ -1,13 +1,16 @@
-﻿using System.Threading.Tasks;
+﻿using Nonsense.Application.Users.Dto;
+using Nonsense.Common;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Nonsense.Application.Gateways.Repositories {
 
     public interface IUserRepository {
 
-        Task<GetUserByIdResponse> GetById(string id);
-        Task<GetAllUsersResponse> GetAll();
-        Task<CreateUserResponse> Create(string userName, string email, string password);
-        Task<UpdateUserResponse> Update(string id, string userName, string email, string password);
-        Task<DeleteUserResponse> Delete(string id);
+        Task<BoundaryResponse<string>> Create(string userName, string email, string password);
+        Task<BoundaryResponse<User>> GetById(string id);
+        Task<BoundaryResponse<IEnumerable<User>>> GetAll();
+        Task<OperationResult> Update(string id, string userName, string email, string password);
+        Task<OperationResult> Delete(string id);
     }
 }

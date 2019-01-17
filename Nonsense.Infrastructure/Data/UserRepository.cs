@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Nonsense.Application;
 using Nonsense.Application.Gateways.Repositories;
 using Nonsense.Application.Users.Dto;
 using Nonsense.Common;
 using Nonsense.Common.Utilities;
 using Nonsense.Infrastructure.Identity;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -33,35 +35,7 @@ namespace Nonsense.Infrastructure.Data {
             _passwordHasher = passwordHasher;
         }
 
-        public async Task<GetUserByIdResponse> GetById(string id) {
-            Guard.NotNullOrEmpty(id, nameof(id));
-
-            var user = await _userManager.FindByIdAsync(id);
-
-            var userFound = (user != null);
-
-            return new GetUserByIdResponse(userFound,
-                userFound
-                    ? null
-                    : new string[] { Errors.UserNotFound },
-                userFound
-                    ? new User {
-                        Id = user.Id,
-                        UserName = user.UserName,
-                        Email = user.Email }
-                    : null);
-        }
-
-        public async Task<GetAllUsersResponse> GetAll() {
-            return await Task.FromResult(new GetAllUsersResponse(true, null,
-                _userManager.Users.Select(u => new User {
-                    Id = u.Id,
-                    UserName = u.UserName,
-                    Email = u.Email
-                })));
-        }
-
-        public async Task<CreateUserResponse> Create(string userName, string email, string password) {
+        public async Task<BoundaryResponse<string>> Create(string userName, string email, string password) {
 
             var user = new ApplicationUser {
                 UserName = userName,
@@ -70,7 +44,7 @@ namespace Nonsense.Infrastructure.Data {
 
             var creatingResult = await _userManager.CreateAsync(user, password);
 
-            return new CreateUserResponse(creatingResult.Succeeded, 
+            return new BoundaryResponse<string>(creatingResult.Succeeded, 
                 creatingResult.Succeeded 
                     ? null 
                     : creatingResult.Errors.Select(e => e.Description),
@@ -79,12 +53,41 @@ namespace Nonsense.Infrastructure.Data {
                     : null);
         }
 
-        public async Task<UpdateUserResponse> Update(string id, string userName, string email, string password) {
+        public async Task<BoundaryResponse<User>> GetById(string id) {
             Guard.NotNullOrEmpty(id, nameof(id));
 
             var user = await _userManager.FindByIdAsync(id);
 
+            var userFound = (user != null);
+
+            return new BoundaryResponse<User>(userFound,
+                userFound
+                    ? null
+                    : new string[] { Errors.UserNotFound },
+                userFound
+                    ? new User {
+                        Id = user.Id,
+                        UserName = user.UserName,
+                        Email = user.Email
+                    }
+                    : null);
+        }
+
+        public async Task<BoundaryResponse<IEnumerable<User>>> GetAll() {
+            return await Task.FromResult(new BoundaryResponse<IEnumerable<User>>(true, null,
+                _userManager.Users.Select(u => new User {
+                    Id = u.Id,
+                    UserName = u.UserName,
+                    Email = u.Email
+                })));
+        }
+
+        public async Task<OperationResult> Update(string id, string userName, string email, string password) {
+            Guard.NotNullOrEmpty(id, nameof(id));
+
             var result = new OperationResult { Success = false };
+
+            var user = await _userManager.FindByIdAsync(id);
 
             if (user != null) {
                 user.Email = email;
@@ -125,10 +128,10 @@ namespace Nonsense.Infrastructure.Data {
                 result.AddError(Errors.UserNotFound);
             }
 
-            return new UpdateUserResponse(result.Success, result.ErrorsList, user.Id);
+            return result;
         }
 
-        public async Task<DeleteUserResponse> Delete(string id) {
+        public async Task<OperationResult> Delete(string id) {
             var result = new OperationResult();
 
             var user = await _userManager.FindByIdAsync(id);
@@ -146,7 +149,7 @@ namespace Nonsense.Infrastructure.Data {
                 result.AddError(Errors.UserNotFound);
             }
 
-            return new DeleteUserResponse(result.Success, result.ErrorsList, user?.Id);
+            return result;
         }
 
         private static class Errors {

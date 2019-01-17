@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Nonsense.Application;
 using Nonsense.Application.Gateways.WebServices;
 using Nonsense.Common.Utilities;
 using System;
@@ -27,8 +28,8 @@ namespace Nonsense.Infrastructure.WebServices {
             _apiKey = config["FlickrService:ApiKey"];
         }
 
-        public async Task<FlickrServiceResponse> GetRandomImages(string tags, int imagesCount) {
-            var result = new FlickrServiceResponse();
+        public async Task<BoundaryResponse<string>> GetRandomImages(string tags, int imagesCount) {
+            var result = new BoundaryResponse<string>(true, null, String.Empty);
 
             if (0 >= imagesCount || imagesCount > _perPage_ApiLimit) {
                 result.Success = false;

@@ -1,12 +1,8 @@
-﻿
+﻿using System.ComponentModel.DataAnnotations;
 
-using System.ComponentModel.DataAnnotations;
+namespace Nonsense.MvcApp.Areas.Admin.Features.Accounts {
 
-namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
-
-    public class EditViewModel {
-
-        public string Id { get; set; }
+    public class CreateViewModel {
 
         [Display(Name = "Логин")]
         [Required]
@@ -16,6 +12,7 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
         public string Email { get; set; }
 
         [Display(Name = "Пароль")]
+        [Required]
         public string Password { get; set; }
     }
 }

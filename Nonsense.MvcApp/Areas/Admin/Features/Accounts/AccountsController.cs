@@ -6,22 +6,22 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
+namespace Nonsense.MvcApp.Areas.Admin.Features.Accounts {
     [Area("Admin")]
-    public class UsersController : Controller {
+    public class AccountsController : Controller {
 
-        private readonly IUserService _userService;
+        private readonly IAccountService _accountService;
 
-        public UsersController(IUserService userService) {
-            Guard.NotNull(userService, nameof(userService));
+        public AccountsController(IAccountService accountService) {
+            Guard.NotNull(accountService, nameof(accountService));
 
-            _userService = userService;
+            _accountService = accountService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index() {
-            var users = (await _userService.GetAllUsers()).Data;
-            return View(users);
+            var accounts = (await _accountService.GetAllAccounts()).Data;
+            return View(accounts);
         }
 
         [HttpGet]
@@ -30,23 +30,23 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
 
             IActionResult result;
 
-            var response = await _userService.GetUserById(id);
+            var response = await _accountService.GetAccountById(id);
 
             if (response.Success) {
-                var user = response.Data;
+                var account = response.Data;
 
                 var model = new DisplayViewModel {
-                    Id = user.Id,
-                    UserName = user.UserName,
-                    Email = user.Email
+                    Id = account.Id,
+                    UserName = account.UserName,
+                    Email = account.Email
                 };
 
                 result = View(model);
             }
             else {
                 AddErrors(response.ErrorsList);
-                var users = (await _userService.GetAllUsers()).Data;
-                result = View("Index", users);
+                var accounts = (await _accountService.GetAllAccounts()).Data;
+                result = View("Index", accounts);
             }
 
             return result;
@@ -62,7 +62,7 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
             IActionResult result;
 
             if (ModelState.IsValid) {
-                var response = await _userService.CreateUser(new User {
+                var response = await _accountService.CreateAccount(new Account {
                     UserName = model.UserName,
                     Email = model.Email,
                     Password = model.Password
@@ -89,23 +89,23 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
 
             IActionResult result;
 
-            var response = await _userService.GetUserById(id);
+            var response = await _accountService.GetAccountById(id);
 
             if (response.Success) {
-                var user = response.Data;
+                var account = response.Data;
 
                 var model = new EditViewModel {
-                    Id = user.Id,
-                    UserName = user.UserName,
-                    Email = user.Email
+                    Id = account.Id,
+                    UserName = account.UserName,
+                    Email = account.Email
                 };
 
                 result = View(model);
             }
             else {
                 AddErrors(response.ErrorsList);
-                var users = (await _userService.GetAllUsers()).Data;
-                result = View("Index", users);
+                var accounts = (await _accountService.GetAllAccounts()).Data;
+                result = View("Index", accounts);
             }
 
             return result;
@@ -118,7 +118,7 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
             IActionResult result;
 
             if (ModelState.IsValid) {
-                var response = await _userService.EditUser(new User {
+                var response = await _accountService.EditAccount(new Account {
                     Id = model.Id,
                     UserName = model.UserName,
                     Email = model.Email,
@@ -146,15 +146,15 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
 
             IActionResult result;
 
-            var response = await _userService.DeleteUser(id);
+            var response = await _accountService.DeleteAccount(id);
 
             if (response.Success) {
                 result = RedirectToAction("Index");
             }
             else {
                 AddErrors(response.ErrorsList);
-                var users = (await _userService.GetAllUsers()).Data;
-                result = View("Index", users);
+                var accounts = (await _accountService.GetAllAccounts()).Data;
+                result = View("Index", accounts);
             }
 
             return result;

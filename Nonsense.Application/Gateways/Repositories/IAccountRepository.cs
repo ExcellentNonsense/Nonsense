@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace Nonsense.Application.Gateways.Repositories {
 
-    public interface IUserRepository {
+    public interface IAccountRepository {
 
         Task<BoundaryResponse<string>> Create(string userName, string email, string password);
-        Task<BoundaryResponse<User>> GetById(string id);
-        Task<BoundaryResponse<IEnumerable<User>>> GetAll();
-        Task<OperationResult> Update(string id, string userName, string email, string password);
+        Task<BoundaryResponse<Account>> GetById(string id);
+        Task<BoundaryResponse<IEnumerable<Account>>> GetAll();
+        Task<OperationResult> Update(Account account);
         Task<OperationResult> Delete(string id);
     }
 }

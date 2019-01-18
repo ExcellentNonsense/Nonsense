@@ -6,9 +6,6 @@ namespace Nonsense.Domain.Entities {
     public sealed class Profile : BaseEntity {
 
         public string IdentityGuid { get; private set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public DateTime? BirthDate { get; set; }
         public string SpendTimeOn { get; set; }
         public DateTime SpentOnNonsenseToday { get; set; }
         public DateTime SpentOnNonsensePerMonth { get; set; }

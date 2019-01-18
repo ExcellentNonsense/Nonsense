@@ -21,8 +21,8 @@ namespace Nonsense.Infrastructure {
                 .InstancePerLifetimeScope();
 
             builder
-                .RegisterType<UserRepository>()
-                .As<IUserRepository>()
+                .RegisterType<AccountRepository>()
+                .As<IAccountRepository>()
                 .InstancePerLifetimeScope();
         }
     }

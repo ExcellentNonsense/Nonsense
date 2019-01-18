@@ -1,4 +1,4 @@
-﻿@model IEnumerable<User>
+﻿@model IEnumerable<Account>
 
 @{
   ViewBag.Title = "Пользователи";
@@ -9,20 +9,20 @@
 <div class="text-danger" asp-validation-summary="ModelOnly"></div>
 
 <table class="table table-sm table-bordered">
-  <tr><th>ID</th><th>Имя</th><th>Email</th></tr>
+  <tr><th>ID</th><th>Логин</th><th>Email</th></tr>
   @if (Model.Count() == 0) {
     <tr><td colspan="3" class="text-center">Пользователей нет</td></tr>
   }
   else {
-    foreach (User user in Model) {
+    foreach (Account account in Model) {
       <tr>
-        <td>@user.Id</td>
-        <td>@user.UserName</td>
-        <td>@user.Email</td>
+        <td>@account.Id</td>
+        <td>@account.UserName</td>
+        <td>@account.Email</td>
         <td>
-          <a asp-action="Display" asp-route-id="@user.Id" class="btn btn-sm btn-info">Карточка</a>
-          <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-sm btn-info">Редактировать</a>
-          <form asp-action="Delete" asp-route-id="@user.Id" method="post" class="d-inline-block">
+          <a asp-action="Display" asp-route-id="@account.Id" class="btn btn-sm btn-info">Карточка</a>
+          <a asp-action="Edit" asp-route-id="@account.Id" class="btn btn-sm btn-info">Редактировать</a>
+          <form asp-action="Delete" asp-route-id="@account.Id" method="post" class="d-inline-block">
             <button type="submit" class="btn btn-sm btn-danger ml-2">Удалить</button>
           </form>
         </td>

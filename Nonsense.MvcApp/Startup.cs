@@ -61,7 +61,7 @@ namespace Nonsense.MvcApp {
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: null,
-                    template: "{area:exists}/{controller=Users}/{action=Index}"
+                    template: "{area:exists}/{controller=Accounts}/{action=Index}"
                 );
 
                 routes.MapRoute(

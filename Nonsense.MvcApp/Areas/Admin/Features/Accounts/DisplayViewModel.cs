@@ -1,6 +1,6 @@
 ﻿
 
-namespace Nonsense.MvcApp.Areas.Admin.Features.Users {
+namespace Nonsense.MvcApp.Areas.Admin.Features.Accounts {
 
     public class DisplayViewModel {
 

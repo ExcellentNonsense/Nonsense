@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace Nonsense.Infrastructure.Data {
 
-    public sealed class UserRepository : IUserRepository {
+    public sealed class AccountRepository : IAccountRepository {
 
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUserValidator<ApplicationUser> _userValidator;
         private readonly IPasswordValidator<ApplicationUser> _passwordValidator;
         private readonly IPasswordHasher<ApplicationUser> _passwordHasher;
 
-        public UserRepository(
+        public AccountRepository(
             UserManager<ApplicationUser> userManager,
             IUserValidator<ApplicationUser> userValidator,
             IPasswordValidator<ApplicationUser> passwordValidator,
@@ -53,19 +53,19 @@ namespace Nonsense.Infrastructure.Data {
                     : null);
         }
 
-        public async Task<BoundaryResponse<User>> GetById(string id) {
+        public async Task<BoundaryResponse<Account>> GetById(string id) {
             Guard.NotNullOrEmpty(id, nameof(id));
 
             var user = await _userManager.FindByIdAsync(id);
 
             var userFound = (user != null);
 
-            return new BoundaryResponse<User>(userFound,
+            return new BoundaryResponse<Account>(userFound,
                 userFound
                     ? null
                     : new string[] { Errors.UserNotFound },
                 userFound
-                    ? new User {
+                    ? new Account {
                         Id = user.Id,
                         UserName = user.UserName,
                         Email = user.Email
@@ -73,25 +73,25 @@ namespace Nonsense.Infrastructure.Data {
                     : null);
         }
 
-        public async Task<BoundaryResponse<IEnumerable<User>>> GetAll() {
-            return await Task.FromResult(new BoundaryResponse<IEnumerable<User>>(true, null,
-                _userManager.Users.Select(u => new User {
+        public async Task<BoundaryResponse<IEnumerable<Account>>> GetAll() {
+            return await Task.FromResult(new BoundaryResponse<IEnumerable<Account>>(true, null,
+                _userManager.Users.Select(u => new Account {
                     Id = u.Id,
                     UserName = u.UserName,
                     Email = u.Email
                 })));
         }
 
-        public async Task<OperationResult> Update(string id, string userName, string email, string password) {
-            Guard.NotNullOrEmpty(id, nameof(id));
+        public async Task<OperationResult> Update(Account account) {
+            Guard.NotNull(account, nameof(account));
 
             var result = new OperationResult { Success = false };
 
-            var user = await _userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(account.Id);
 
             if (user != null) {
-                user.Email = email;
-                user.UserName = userName;
+                user.Email = account.Email;
+                user.UserName = account.UserName;
                 var emailValidationResult = await _userValidator.ValidateAsync(_userManager, user);
 
                 if (!emailValidationResult.Succeeded) {
@@ -100,11 +100,11 @@ namespace Nonsense.Infrastructure.Data {
 
                 IdentityResult passwordValidationResult = null;
 
-                if (!string.IsNullOrEmpty(password)) {
-                    passwordValidationResult = await _passwordValidator.ValidateAsync(_userManager, user, password);
+                if (!string.IsNullOrEmpty(account.Password)) {
+                    passwordValidationResult = await _passwordValidator.ValidateAsync(_userManager, user, account.Password);
 
                     if (passwordValidationResult.Succeeded) {
-                        user.PasswordHash = _passwordHasher.HashPassword(user, password);
+                        user.PasswordHash = _passwordHasher.HashPassword(user, account.Password);
                     }
                     else {
                         result.AddError(passwordValidationResult.Errors.Select(e => e.Description));

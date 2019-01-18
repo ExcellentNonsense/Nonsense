@@ -10,8 +10,8 @@ namespace Nonsense.Application {
             base.Load(builder);
 
             builder
-                .RegisterType<UserService>()
-                .As<IUserService>()
+                .RegisterType<AccountService>()
+                .As<IAccountService>()
                 .InstancePerLifetimeScope();
 
             builder

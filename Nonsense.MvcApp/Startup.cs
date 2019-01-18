@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -40,6 +41,8 @@ namespace Nonsense.MvcApp {
             services.AddIdentity<ApplicationUser, IdentityRole>(o => o.User.RequireUniqueEmail = true)
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddAutoMapper();
         }
 
         // Register services with Autofac container.

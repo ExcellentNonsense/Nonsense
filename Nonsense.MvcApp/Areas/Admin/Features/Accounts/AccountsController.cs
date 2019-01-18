@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Nonsense.Application.Users;
 using Nonsense.Application.Users.Dto;
 using Nonsense.Common.Utilities;
@@ -11,11 +12,14 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Accounts {
     public class AccountsController : Controller {
 
         private readonly IAccountService _accountService;
+        private readonly IMapper _mapper;
 
-        public AccountsController(IAccountService accountService) {
+        public AccountsController(IAccountService accountService, IMapper mapper) {
             Guard.NotNull(accountService, nameof(accountService));
+            Guard.NotNull(mapper, nameof(mapper));
 
             _accountService = accountService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -34,13 +38,7 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Accounts {
 
             if (response.Success) {
                 var account = response.Data;
-
-                var model = new DisplayViewModel {
-                    Id = account.Id,
-                    UserName = account.UserName,
-                    Email = account.Email
-                };
-
+                var model = _mapper.Map<DisplayViewModel>(account);
                 result = View(model);
             }
             else {
@@ -62,11 +60,8 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Accounts {
             IActionResult result;
 
             if (ModelState.IsValid) {
-                var response = await _accountService.CreateAccount(new Account {
-                    UserName = model.UserName,
-                    Email = model.Email,
-                    Password = model.Password
-                });
+                var account = _mapper.Map<Account>(model);
+                var response = await _accountService.CreateAccount(account);
 
                 if (response.Success) {
                     result = RedirectToAction("Index");
@@ -93,13 +88,7 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Accounts {
 
             if (response.Success) {
                 var account = response.Data;
-
-                var model = new EditViewModel {
-                    Id = account.Id,
-                    UserName = account.UserName,
-                    Email = account.Email
-                };
-
+                var model = _mapper.Map<EditViewModel>(account);
                 result = View(model);
             }
             else {
@@ -118,12 +107,8 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Accounts {
             IActionResult result;
 
             if (ModelState.IsValid) {
-                var response = await _accountService.EditAccount(new Account {
-                    Id = model.Id,
-                    UserName = model.UserName,
-                    Email = model.Email,
-                    Password = model.Password
-                });
+                var account = _mapper.Map<Account>(model);
+                var response = await _accountService.EditAccount(account);
 
                 if (response.Success) {
                     result = RedirectToAction("Index");

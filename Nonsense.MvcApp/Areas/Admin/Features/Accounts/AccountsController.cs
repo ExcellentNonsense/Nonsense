@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Nonsense.Application.Users;
 using Nonsense.Application.Users.Dto;
 using Nonsense.Common.Utilities;
+using Nonsense.MvcApp.Infrastructure.Filters;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -51,27 +52,23 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Accounts {
         }
 
         [HttpGet]
-        public IActionResult Create() => View();
+        public IActionResult Create(string id) => View();
 
         [HttpPost]
+        [ValidateModelState]
         public async Task<IActionResult> Create(CreateViewModel model) {
             Guard.NotNull(model, nameof(model));
 
             IActionResult result;
 
-            if (ModelState.IsValid) {
-                var account = _mapper.Map<Account>(model);
-                var response = await _accountService.CreateAccount(account);
+            var account = _mapper.Map<Account>(model);
+            var response = await _accountService.CreateAccount(account);
 
-                if (response.Success) {
-                    result = RedirectToAction("Index");
-                }
-                else {
-                    AddErrors(response.ErrorsList);
-                    result = View(model);
-                }
+            if (response.Success) {
+                result = RedirectToAction("Index");
             }
             else {
+                AddErrors(response.ErrorsList);
                 result = View(model);
             }
 
@@ -101,24 +98,20 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Accounts {
         }
 
         [HttpPost]
+        [ValidateModelState]
         public async Task<IActionResult> Edit(EditViewModel model) {
             Guard.NotNull(model, nameof(model));
 
             IActionResult result;
 
-            if (ModelState.IsValid) {
-                var account = _mapper.Map<Account>(model);
-                var response = await _accountService.EditAccount(account);
+            var account = _mapper.Map<Account>(model);
+            var response = await _accountService.EditAccount(account);
 
-                if (response.Success) {
-                    result = RedirectToAction("Index");
-                }
-                else {
-                    AddErrors(response.ErrorsList);
-                    result = View(model);
-                }
+            if (response.Success) {
+                result = RedirectToAction("Index");
             }
             else {
+                AddErrors(response.ErrorsList);
                 result = View(model);
             }
 

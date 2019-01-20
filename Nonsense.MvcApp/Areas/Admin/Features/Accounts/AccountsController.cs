@@ -57,8 +57,6 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Accounts {
         [HttpPost]
         [ValidateModelState]
         public async Task<IActionResult> Create(CreateViewModel model) {
-            Guard.NotNull(model, nameof(model));
-
             IActionResult result;
 
             var account = _mapper.Map<Account>(model);
@@ -100,8 +98,6 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Accounts {
         [HttpPost]
         [ValidateModelState]
         public async Task<IActionResult> Edit(EditViewModel model) {
-            Guard.NotNull(model, nameof(model));
-
             IActionResult result;
 
             var account = _mapper.Map<Account>(model);

@@ -3,6 +3,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,7 @@ using Nonsense.Application;
 using Nonsense.Infrastructure;
 using Nonsense.Infrastructure.Identity;
 using Nonsense.MvcApp.Extensions;
+using Nonsense.MvcApp.Infrastructure;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 
@@ -26,7 +28,8 @@ namespace Nonsense.MvcApp {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services) {
-            services.AddMvc().AddFeatureFolders();
+            services.AddMvc(o => o.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()))
+                .AddFeatureFolders();
 
             // Create the HttpClientFactory to provide the HttpClient to the Typed Client classes.
             services.AddHttpClient();
@@ -38,7 +41,11 @@ namespace Nonsense.MvcApp {
             services.AddDbContext<AppIdentityDbContext>(o =>
                 o.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(o => o.User.RequireUniqueEmail = true)
+            services.AddIdentity<ApplicationUser, IdentityRole>(o => {
+                o.Password.RequiredLength = 8;
+                o.User.RequireUniqueEmail = true;
+            })
+                .AddPasswordValidator<CustomPasswordValidator>()
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
                 .AddDefaultTokenProviders();
 

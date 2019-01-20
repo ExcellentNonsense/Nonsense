@@ -90,12 +90,12 @@ namespace Nonsense.Infrastructure.Data {
             var user = await _userManager.FindByIdAsync(account.Id);
 
             if (user != null) {
-                user.Email = account.Email;
                 user.UserName = account.UserName;
-                var emailValidationResult = await _userValidator.ValidateAsync(_userManager, user);
+                user.Email = account.Email;
+                var userValidationResult = await _userValidator.ValidateAsync(_userManager, user);
 
-                if (!emailValidationResult.Succeeded) {
-                    result.AddError(emailValidationResult.Errors.Select(e => e.Description));
+                if (!userValidationResult.Succeeded) {
+                    result.AddError(userValidationResult.Errors.Select(e => e.Description));
                 }
 
                 IdentityResult passwordValidationResult = null;
@@ -111,7 +111,7 @@ namespace Nonsense.Infrastructure.Data {
                     }
                 }
 
-                if (emailValidationResult.Succeeded
+                if (userValidationResult.Succeeded
                     && (passwordValidationResult == null || passwordValidationResult.Succeeded)) {
 
                     var updatingResult = await _userManager.UpdateAsync(user);

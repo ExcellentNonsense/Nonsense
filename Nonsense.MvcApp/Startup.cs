@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -29,7 +30,8 @@ namespace Nonsense.MvcApp {
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services) {
             services.AddMvc(o => o.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()))
-                .AddFeatureFolders();
+                .AddFeatureFolders()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             // Create the HttpClientFactory to provide the HttpClient to the Typed Client classes.
             services.AddHttpClient();

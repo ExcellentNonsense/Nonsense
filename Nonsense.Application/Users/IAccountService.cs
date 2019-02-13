@@ -9,8 +9,9 @@ namespace Nonsense.Application.Users {
 
         Task<BoundaryResponse<string>> CreateAccount(Account account);
         Task<BoundaryResponse<Account>> GetAccountById(string id);
-        Task<BoundaryResponse<IEnumerable<Account>>> GetAllAccounts();
+        Task<BoundaryResponse<IEnumerable<Account>>> GetAccounts(int skip, int take);
         Task<OperationResult> EditAccount(Account account);
         Task<OperationResult> DeleteAccount(string id);
+        Task<int> AccountsCount();
     }
 }

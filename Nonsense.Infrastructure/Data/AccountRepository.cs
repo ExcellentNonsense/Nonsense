@@ -44,9 +44,9 @@ namespace Nonsense.Infrastructure.Data {
 
             var creatingResult = await _userManager.CreateAsync(user, password);
 
-            return new BoundaryResponse<string>(creatingResult.Succeeded, 
-                creatingResult.Succeeded 
-                    ? null 
+            return new BoundaryResponse<string>(creatingResult.Succeeded,
+                creatingResult.Succeeded
+                    ? null
                     : creatingResult.Errors.Select(e => e.Description),
                 creatingResult.Succeeded
                     ? user.Id
@@ -73,13 +73,16 @@ namespace Nonsense.Infrastructure.Data {
                     : null);
         }
 
-        public async Task<BoundaryResponse<IEnumerable<Account>>> GetAll() {
+        public async Task<BoundaryResponse<IEnumerable<Account>>> List(int skip, int take) {
             return await Task.FromResult(new BoundaryResponse<IEnumerable<Account>>(true, null,
-                _userManager.Users.Select(u => new Account {
-                    Id = u.Id,
-                    UserName = u.UserName,
-                    Email = u.Email
-                })));
+                _userManager.Users
+                    .Skip(skip)
+                    .Take(take)
+                    .Select(u => new Account {
+                        Id = u.Id,
+                        UserName = u.UserName,
+                        Email = u.Email
+                    })));
         }
 
         public async Task<OperationResult> Update(Account account) {
@@ -150,6 +153,10 @@ namespace Nonsense.Infrastructure.Data {
             }
 
             return result;
+        }
+
+        public async Task<int> Count() {
+            return await Task.FromResult(_userManager.Users.Count());
         }
 
         private static class Errors {

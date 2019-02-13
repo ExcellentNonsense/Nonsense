@@ -18,5 +18,12 @@ namespace Nonsense.Common.Utilities {
                 throw new ArgumentNullException(argName);
             }
         }
+
+        [DebuggerStepThrough]
+        public static void NotOutOfRange(int argValue, string argName, int minValue, int maxValue) {
+            if (minValue > argValue || argValue > maxValue) {
+                throw new ArgumentOutOfRangeException(argName);
+            }
+        }
     }
 }

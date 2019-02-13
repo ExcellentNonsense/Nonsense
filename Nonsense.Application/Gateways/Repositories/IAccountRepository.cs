@@ -9,8 +9,9 @@ namespace Nonsense.Application.Gateways.Repositories {
 
         Task<BoundaryResponse<string>> Create(string userName, string email, string password);
         Task<BoundaryResponse<Account>> GetById(string id);
-        Task<BoundaryResponse<IEnumerable<Account>>> GetAll();
+        Task<BoundaryResponse<IEnumerable<Account>>> List(int skip, int take);
         Task<OperationResult> Update(Account account);
         Task<OperationResult> Delete(string id);
+        Task<int> Count();
     }
 }

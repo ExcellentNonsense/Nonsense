@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Nonsense.Application.Users;
 using Nonsense.Application.Users.Dto;
 using Nonsense.Common.Utilities;
+using Nonsense.MvcApp.Infrastructure;
 using Nonsense.MvcApp.Infrastructure.Filters;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Nonsense.MvcApp.Areas.Admin.Features.Accounts {
@@ -24,8 +26,8 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Accounts {
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index() {
-            var accounts = (await _accountService.GetAllAccounts()).Data;
+        public async Task<IActionResult> Index(int page = 1) {
+            var accounts = await GetAccounts(page);
             return View(accounts);
         }
 
@@ -44,7 +46,7 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Accounts {
             }
             else {
                 AddErrors(response.ErrorsList);
-                var accounts = (await _accountService.GetAllAccounts()).Data;
+                var accounts = await GetAccounts();
                 result = View("Index", accounts);
             }
 
@@ -88,7 +90,7 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Accounts {
             }
             else {
                 AddErrors(response.ErrorsList);
-                var accounts = (await _accountService.GetAllAccounts()).Data;
+                var accounts = await GetAccounts();
                 result = View("Index", accounts);
             }
 
@@ -127,15 +129,24 @@ namespace Nonsense.MvcApp.Areas.Admin.Features.Accounts {
             }
             else {
                 AddErrors(response.ErrorsList);
-                var accounts = (await _accountService.GetAllAccounts()).Data;
+                var accounts = await GetAccounts();
                 result = View("Index", accounts);
             }
 
             return result;
         }
 
+        private async Task<PaginatedCollection<Account>> GetAccounts(int page = 1) {
+            var pageIndex = page - 1;
+            int accountsPerPage = 20;
+
+            var accountsCount = await _accountService.AccountsCount();
+            var accounts = (await _accountService.GetAccounts(pageIndex * accountsPerPage, accountsPerPage)).Data;
+            return new PaginatedCollection<Account>(accounts, page, accountsPerPage, accountsCount);
+        }
+
         private void AddErrors(IEnumerable<string> errors) {
-            foreach (var error in errors) {
+            foreach (var error in errors ?? Enumerable.Empty<string>()) {
                 ModelState.AddModelError(String.Empty, error);
             }
         }

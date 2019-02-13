@@ -35,3 +35,13 @@
     }
   </tbody>
 </table>
+
+@{
+    var prevPageDisabled = Model.HasPreviousPage ? "" : "disabled";
+    var nextPageDisabled = Model.HasNextPage ? "" : "disabled";
+}
+
+<div class="container pb-5">
+  <a asp-action="Index" asp-route-page="@(Model.CurrentPage - 1)" class="btn btn-primary @prevPageDisabled">Назад</a>
+  <a asp-action="Index" asp-route-page="@(Model.CurrentPage + 1)" class="btn btn-primary @nextPageDisabled">Вперед</a>
+</div>

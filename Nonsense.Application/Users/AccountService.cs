@@ -33,8 +33,8 @@ namespace Nonsense.Application.Users {
             return new BoundaryResponse<Account>(response.Success, response.ErrorsList, response.Data);
         }
 
-        public async Task<BoundaryResponse<IEnumerable<Account>>> GetAllAccounts() {
-            var response = await _accountRepository.GetAll();
+        public async Task<BoundaryResponse<IEnumerable<Account>>> GetAccounts(int skip, int take) {
+            var response = await _accountRepository.List(skip, take);
 
             return new BoundaryResponse<IEnumerable<Account>>(response.Success, response.ErrorsList, response.Data);
         }
@@ -53,6 +53,10 @@ namespace Nonsense.Application.Users {
             var response = await _accountRepository.Delete(id);
 
             return new OperationResult(response.Success, response.ErrorsList);
+        }
+
+        public async Task<int> AccountsCount() {
+            return await _accountRepository.Count();
         }
     }
 }

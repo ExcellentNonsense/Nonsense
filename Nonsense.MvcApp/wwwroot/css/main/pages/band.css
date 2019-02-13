@@ -135,7 +135,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: url(../../images/band_item_image_cover.png);
+  background: url(../../../images/band_item_image_cover.png);
   background-size: cover;
   opacity: 0.08;
 }

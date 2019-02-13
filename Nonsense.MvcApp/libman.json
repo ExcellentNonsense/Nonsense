@@ -34,7 +34,8 @@
       "provider": "unpkg",
       "library": "bootstrap@4.2.1",
       "files": [
-        "dist/css/bootstrap.min.css"
+        "dist/css/bootstrap.min.css",
+        "dist/js/bootstrap.min.js"
       ],
       "destination": "wwwroot/lib/bootstrap/"
     }

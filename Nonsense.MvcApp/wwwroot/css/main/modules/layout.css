@@ -11,14 +11,14 @@
   }
 
   #bg-time-tags {
-    background-image: url(../../images/bg_time_tags.png);
+    background-image: url(../../../images/bg_time_tags.png);
     background-size: contain;
     opacity: 0.05;
     z-index: -4;
   }
 
   #bg-water {
-    background-image: url(../../images/bg_water.png);
+    background-image: url(../../../images/bg_water.png);
     background-size: contain;
     background-position-x: -86vw;
     background-position-y: -107vh;

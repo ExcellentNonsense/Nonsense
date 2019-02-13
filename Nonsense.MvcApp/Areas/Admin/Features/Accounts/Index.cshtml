@@ -1,33 +1,37 @@
-﻿@model IEnumerable<Account>
+﻿@model PaginatedCollection<Account>
 
 @{
-  ViewBag.Title = "Пользователи";
+    ViewBag.Title = "Пользователи";
+    ViewBag.Description = "Учетные записи зарегистрированных пользователей";
 }
 
-<div class="p-1 bg-primary text-white"><h4>Пользователи</h4></div>
+<div class="container">
+  <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+</div>
 
-<div class="text-danger" asp-validation-summary="ModelOnly"></div>
-
-<table class="table table-sm table-bordered">
-  <tr><th>ID</th><th>Логин</th><th>Email</th></tr>
-  @if (Model.Count() == 0) {
-    <tr><td colspan="3" class="text-center">Пользователей нет</td></tr>
-  }
-  else {
-    foreach (Account account in Model) {
-      <tr>
-        <td>@account.Id</td>
-        <td>@account.UserName</td>
-        <td>@account.Email</td>
-        <td>
-          <a asp-action="Display" asp-route-id="@account.Id" class="btn btn-sm btn-info">Карточка</a>
-          <a asp-action="Edit" asp-route-id="@account.Id" class="btn btn-sm btn-info">Редактировать</a>
-          <form asp-action="Delete" asp-route-id="@account.Id" method="post" class="d-inline-block">
-            <button type="submit" class="btn btn-sm btn-danger ml-2">Удалить</button>
-          </form>
-        </td>
-      </tr>
+<table class="table table-sm table-bordered table-hover">
+  <thead>
+    <tr><th>ID</th><th>Логин</th><th>Email</th><th><a class="btn btn-sm btn-primary d-block" asp-action="Create">Создать пользователя</a></th></tr>
+  </thead>
+  <tbody>
+    @if (Model.Items.Count() == 0) {
+      <tr><td colspan="4" class="text-center">Пользователей нет</td></tr>
     }
-  }
+    else {
+      foreach (Account account in Model.Items) {
+        <tr>
+          <td>@account.Id</td>
+          <td>@account.UserName</td>
+          <td>@account.Email</td>
+          <td class="table-buttons-row">
+            <a asp-action="Display" asp-route-id="@account.Id" class="btn btn-sm btn-info">Карточка</a>
+            <a asp-action="Edit" asp-route-id="@account.Id" class="btn btn-sm btn-info">Редактировать</a>
+            <form asp-action="Delete" asp-route-id="@account.Id" method="post" class="d-inline-block">
+              <button type="submit" class="btn btn-sm btn-outline-danger">Удалить</button>
+            </form>
+          </td>
+        </tr>
+      }
+    }
+  </tbody>
 </table>
-<a class="btn btn-primary" asp-action="Create">Создать</a>

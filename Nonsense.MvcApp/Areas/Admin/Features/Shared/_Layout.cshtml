@@ -8,6 +8,7 @@
   <partial name="_Favicons" />
   <environment include="Development">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/areas/admin.css" />
   </environment>
   <environment exclude="Development">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -17,27 +18,53 @@
           asp-fallback-test-class="sr-only"
           asp-fallback-test-property="position"
           asp-fallback-test-value="absolute" />
+    <link rel="stylesheet" href="~/css/admin.css" />
   </environment>
 </head>
-<body class="p-1">
-  <header>
-    <span class="h4 text-primary">Ерунда</span><sup class="text-primary">&copy;</sup>
-    <h2>Администрирование</h2>
-    <nav class="mt-4 mb-4 border-top">
-      <ul class="nav">
-        <li class="nav-item">
-          <a class="nav-link" asp-action="Index" asp-controller="Accounts">Пользователи</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    @RenderBody()
-  </main>
+
+<body>
+  <div id="wrapper">
+    <header>
+      <nav class="nav navbar navbar-expand-md navbar-light">
+        <div class="container">
+          <a asp-action="Index" asp-controller="Accounts" class="navbar-brand">
+            <img src="~/images/partial_logo.svg" class="site-logo" /> Ерунда
+          </a>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a asp-action="Index" asp-controller="Accounts" class="nav-link">Пользователи</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="container pb-2">
+        <h4 class="mb-0 pt-4">@ViewBag.Title</h4>
+        <h6 class="text-muted">@ViewBag.Description</h6>
+      </div>
+
+      @RenderBody()
+    </main>
+
+    <footer>
+      <div class="container">
+        <p class="text-center m-0 py-3">&copy; 2018-2019 ExcellentNonsense</p>
+      </div>
+    </footer>
+  </div>
+
   <environment include="Development">
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
   </environment>
   <environment exclude="Development">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -54,6 +81,11 @@
             asp-fallback-src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
             asp-fallback-test="window.jQuery.validator.unobtrusive"
             integrity="sha256-9GycpJnliUjJDVDqP0UEu/bsm9U+3dnQUH8+3W10vkY="
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
             crossorigin="anonymous"></script>
   </environment>
 </body>

@@ -4,7 +4,7 @@
 .site-logo {
   width: 390px;
   height: 93px;
-  background-image: url(../../images/site_logo.svg);
+  background-image: url(../../../images/site_logo.svg);
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -41,7 +41,7 @@
   width: 100%;
   height: 66px;
   overflow: hidden;
-  background: url(../../content/logged_in_user_photo.jpg);
+  background: url(../../../content/logged_in_user_photo.jpg);
   background-size: cover;
   box-shadow: -1px 0 1px;
 }
